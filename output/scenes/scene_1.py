@@ -36,7 +36,7 @@ class Scene1(Scene):
         self.wait(1)
 
         # Highlight NEP vs reality gap
-        arrow = Arrow(grp2.get_bottom(), prob_grp.get_top(), color=ORANGE, buff=0.1)
+        arrow = Arrow(grp2.get_bottom(), prob_grp.get_top(), color=ORANGE, buff=0.2)
         gap_label = Text("Gap ↓", font_size=26, color=ORANGE).next_to(arrow, RIGHT, buff=0.1)
         self.play(GrowArrow(arrow), Write(gap_label))
         self.wait(2)

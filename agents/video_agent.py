@@ -18,11 +18,12 @@ from moviepy import (
     TextClip,
     concatenate_videoclips,
     ColorClip,
+    ImageClip,
 )
-from moviepy.video.fx import Resize, Loop
+from moviepy.video.fx import Resize
 
 
-SUBTITLE_FONTSIZE = 24
+SUBTITLE_FONTSIZE = 18
 SUBTITLE_COLOR = "white"
 VIDEO_SIZE = (1280, 720)
 FPS = 24
@@ -129,8 +130,18 @@ def assemble_scene(scene: dict, audio_path: str | None, mp4_path: str | None) ->
         video_clip = VideoFileClip(mp4_path).with_effects([Resize(VIDEO_SIZE)])
         # Match video duration to audio
         if video_clip.duration < audio_duration:
-            video_clip = video_clip.with_effects([Loop(duration=audio_duration)])
-        elif video_clip.duration > audio_duration + 2:
+            # Freeze on last frame instead of going to blank screen
+            extra_duration = audio_duration - video_clip.duration
+            last_frame = video_clip.get_frame(video_clip.duration - 0.01)
+            freeze_clip = (
+                ImageClip(last_frame)
+                .with_duration(extra_duration)
+                .with_fps(video_clip.fps or FPS)
+            )
+            video_clip = concatenate_videoclips(
+                [video_clip, freeze_clip], method="compose"
+            )
+        elif video_clip.duration > audio_duration:
             video_clip = video_clip.subclipped(0, audio_duration)
     else:
         print(f"    No MP4 for scene {scene['scene_id']}, using title card.")
