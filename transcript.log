@@ -1,0 +1,703 @@
+Fetching transcript for video ID: q0TgUtj6vIs
+
+==================================================
+TRANSCRIPT
+==================================================
+[0.1s]       So, you know how on Apple's site we've
+[1.4s]       got the product, we've got quotes come
+[2.8s]       in, we've got dynamic elements like
+[4.3s]       this. We can see sort of like the
+[5.8s]       deconstruction of the product itself,
+[7.6s]       and all of these features on the website
+[9.0s]       give it a super professional and branded
+[10.9s]      feel. And I'm sure that some of you guys
+[12.2s]      have realized by now, but this website
+[13.6s]      is not Apple. This is one that I built
+[15.1s]      with Cloud Code using this new skill in
+[17.4s]      like 30 minutes. So, I'm going to show
+[19.2s]      you guys today the exact process to
+[20.8s]      build sites just like this that are
+[22.4s]      super professional, that have these
+[23.8s]      really nice animations going on, and
+[25.7s]      they just feel awesome. I'm also going
+[27.9s]      to be giving you away the skill and
+[29.4s]      everything that you need to do this for
+[30.7s]      completely free so that even if you've
+[32.5s]      never opened up Cloud Code or you know
+[34.3s]      built a website before you will be able
+[35.9s]      to do exactly what you're seeing on
+[37.3s]      screen. So let's not waste any time and
+[39.0s]      get straight into the video. Okay, so
+[40.5s]      we're using Cloud Code in Visual Studio
+[42.6s]      Code. So if you don't have that, just go
+[44.0s]      to the browser, type in VS Code, and
+[45.8s]      download this for your operating system.
+[47.2s]      It's completely free. Once you're in
+[48.6s]      here, you're going to go over to the
+[49.7s]      left, which is the extensions button.
+[51.4s]      You're going to type in cloud code and
+[52.8s]      install this one. It will then prompt
+[54.4s]      you to sign in with your Anthropic
+[56.0s]      subscription. And by the way, you do
+[57.6s]      have to be on the paid plan. So either
+[59.0s]      the Pro or the Max in order to use Cloud
+[61.0s]      Code. Now, once you've got that
+[62.2s]      installed, you're going to click on this
+[63.3s]      button up here, which is the Explorer,
+[64.9s]      and you need to open up a folder. So
+[66.6s]      just go to your desktop, go to your
+[67.8s]      documents, open up a brand new folder,
+[69.4s]      just call it, you know, 3D website
+[70.8s]      testing, and then open it up right here.
+[72.9s]      So here you can see this is the project
+[74.2s]      that I've been working in. I've just
+[75.4s]      called it animated websites. And what
+[77.0s]      I'm going to do is give you guys all the
+[78.5s]      skills in here that you need in order to
+[80.2s]      just replicate what I'm doing. And I'm
+[82.0s]      giving you guys all of that for free, of
+[83.4s]      course. So that once you have that, all
+[85.2s]      you have to do is give Cloud Code a
+[87.5s]      video. For example, here we have a video
+[89.4s]      of a camera. You can see what happens is
+[91.3s]      it just basically spins around and then
+[92.8s]      it kind of like goes into X-ray mode and
+[95.0s]      we can see inside the camera. And now
+[96.6s]      that Cloud Code has that, you just say,
+[98.1s]      "Build me a website for this video." And
+[100.2s]     what you get is something like this
+[101.7s]     where we have Vanta one. You can see it
+[103.4s]     looks like a product landing page. As we
+[105.0s]     start to scroll down, the camera is
+[106.6s]     revealed. And as we continue to scroll
+[108.2s]     more, we get dynamic text that comes
+[110.1s]     through as well as the actual camera
+[112.4s]     animation starting. And the crazy part
+[114.3s]     is I didn't give it any of the copy. I
+[116.1s]     didn't give it a color scheme. I didn't
+[117.4s]     give it any information about the
+[119.4s]     product. Obviously, you could, but what
+[121.3s]     it will do is it will just basically
+[122.8s]     create this for you. And then you can go
+[124.4s]     ahead and make the tweaks that you need.
+[126.0s]     So, the two skills that you're going to
+[127.1s]     need to go grab are the front-end design
+[129.0s]     skill, which is the one that I grabbed
+[130.5s]     from Anthropic. It was an official
+[131.9s]     skill, but I changed it a little bit.
+[133.5s]     So, this is like kind of my version of
+[134.9s]     the front-end design skill for this
+[136.6s]     specific use case. And then you're also
+[138.2s]     going to need to go get the video to
+[139.7s]     website skill. So, both of these skills
+[141.9s]     are literally just markdown files.
+[143.4s]     They're markdown files that I've worked
+[144.7s]     on that tell Claude Code the best
+[146.4s]     practices for creating these animated 3D
+[148.9s]     websites. And you can get these skills
+[150.6s]     for completely free by going to my free
+[152.2s]     school community. The link for that is
+[153.4s]     down in the description. You'll go to
+[154.7s]     the classroom, you'll go to the skills
+[156.2s]     section, and you'll be able to find all
+[157.6s]     of them right in there. And literally
+[159.1s]     all you'd have to do is take them from
+[160.6s]     your downloads folder, drag them over
+[162.2s]     here to the lefth hand side, and then
+[163.6s]     just basically tell Claude, "Hey, set up
+[165.3s]     this folder." So I've got myclaude.
+[167.0s]     Within that claude, I've got a skills
+[168.7s]     folder. And then within that skills
+[170.2s]     folder, here are my two skills I need
+[172.4s]     you to use. And it should look something
+[174.8s]     like this on the lefth hand side. Now,
+[176.7s]     before you get too overwhelmed, if
+[177.9s]     you've never used Cloud Code before,
+[179.5s]     it's super simple. Right here, we have
+[181.2s]     our actual agent that we talk to and
+[182.9s]     have conversations with. And over here,
+[184.6s]     we just have folders. So, I just showed
+[186.4s]     you where the skills live, which is in
+[187.8s]     acloud folder within a skills folder.
+[190.4s]     But then the other stuff in here is
+[191.8s]     super simple. Here are all the video
+[193.4s]     files that I've used to make the
+[194.6s]     previous websites. And then for each
+[196.6s]     website, it created its own folder. So
+[198.4s]     for the camera website, it has all this
+[200.4s]     information. For the watch website, it
+[201.9s]     has all this information. And for the
+[203.3s]     Yeti website, it has all that
+[204.6s]     information as well. But anyways, if you
+[206.4s]     just follow the steps that I take in
+[207.7s]     this video, it will all make sense and
+[209.4s]     you will get a nice output. And by the
+[211.3s]     way, if that's a bit confusing, then
+[212.5s]     definitely go check out my skills video,
+[214.2s]     which I will tag right up here. And then
+[215.7s]     once you understand that, hop right back
+[217.2s]     over here. All right. So, I'm going to
+[218.4s]     walk you guys through this process step
+[219.9s]     by step, so you can see exactly what I
+[221.8s]     did to create these really cool
+[223.4s]     animations. And what you need to
+[225.0s]     understand is that all of these
+[226.3s]     animations that you're seeing on the
+[228.3s]     site and all the other ones that I've
+[229.7s]     shown, they're just videos. And so, all
+[231.5s]     I did here was had Nano Banana generate
+[233.4s]     two different images for me and then
+[234.8s]     turn it into a video. So, for example,
+[236.6s]     that first one with the Apple Watch is
+[238.0s]     just the Apple Watch kind of opening up
+[239.8s]     and then exposing all of its layers. And
+[242.2s]     then when I wanted it to close back up,
+[243.9s]     I just prompted it to do the opposite.
+[246.0s]     And now we have the second one where it
+[247.7s]     goes from that end frame and then kind
+[249.6s]     of like folds back in on itself and
+[251.4s]     reveals the Apple Watch. So, now that
+[253.4s]     you understand how simple this really
+[254.6s]     is, let's go over to Nano Banana and
+[257.3s]     start making some images. Okay, so the
+[259.0s]     way that I like to use Nano Banana,
+[260.4s]     whether I'm doing it in a playground
+[261.8s]     like this or over API, is with key.ai I
+[264.2s]     because I found that it's really fast
+[265.7s]     and it's like really cheap. So I went to
+[267.6s]     Nano Banana 2, the new version of Nano
+[269.9s]     Banana, and I came in here and did a
+[272.0s]     16x9 aspect ratio image, and I said, I
+[274.9s]     need a professional studio grade image
+[276.4s]     of a blender. It should be against a
+[278.3s]     plain all black background with no
+[280.1s]     shadows, no hands, no reflections. And
+[282.8s]     this is essentially going to be our
+[284.2s]     start frame when we make that actual
+[285.9s]     video. So then I saved that output,
+[287.7s]     dropped it in here as an image input and
+[289.4s]     I just said the exact same prompt, but
+[291.1s]     this time it should be filled with fruit
+[292.7s]     and juice. So now we have our start
+[294.6s]     frame over here and our end frame and we
+[296.7s]     just need to animate it so that it
+[298.2s]     actually looks like fruit and juice is
+[300.4s]     you know being dropped and poured in. So
+[302.3s]     then I found the best results using
+[304.0s]     cling 3.0 which once again you can also
+[306.3s]     access in this key.ai. So we give it the
+[309.7s]     start frame, we give it the end frame
+[311.1s]     and here's what I did for my prompt. I
+[313.4s]     actually went over to Claude and I gave
+[314.8s]     it the start and end frame and said,
+[315.9s]     "Help me make an AI video prompt where I
+[318.6s]     want the lid to float off. I want fruit
+[320.4s]     and juice to be dropped in. And then I
+[321.9s]     want the lid to be put back on. No
+[323.7s]     shadows, no hands, no reflections." It
+[326.1s]     spits out this prompt. I put that into
+[328.2s]     Cling. And here's the result. I haven't
+[330.0s]     watched this yet, so hopefully it's
+[331.1s]     good.
+[335.5s]     Okay. Interesting. I mean, obviously, we
+[337.8s]     maybe want to fix that a little bit, but
+[339.4s]     I'm fine with that for the sake of the
+[340.9s]     demo. the fruit and juice kind of just
+[342.6s]     magically appear from nowhere and now
+[344.3s]     they're in the blender. Okay, so I
+[345.9s]     downloaded that video. I'm just going to
+[347.3s]     drag it over here to the lefth hand side
+[349.0s]     and you can see right now that this
+[350.4s]     video that Cloud Code is looking at is
+[352.2s]     the exact one that we just generated
+[353.6s]     together. So this is what it's going to
+[355.0s]     use. It's basically going to take that
+[356.7s]     video, pull out like 120 frames or
+[359.2s]     however many frames make up that video
+[360.9s]     and then it's going to have all of those
+[362.2s]     saved. So just as an example, if I go to
+[364.6s]     the frames from the watch, you can see
+[366.7s]     it created over a hundred webp pictures
+[370.2s]     from that actual video. And it's kind of
+[372.3s]     like stopotion animation where each one
+[374.1s]     just changes a little bit and as you go
+[375.9s]     through the actual video starts to form.
+[378.3s]     So it basically associates each of these
+[380.2s]     frames with a scroll position. So as you
+[382.6s]     scroll down, it kind of like reveals
+[384.4s]     itself or if you scroll backwards, it
+[386.2s]     goes the other way. So now I'm going to
+[387.8s]     make sure that my agent is on plan mode,
+[389.5s]     which basically means it won't actually
+[390.7s]     do anything. It'll just read things and
+[392.2s]     it will help create a plan which is
+[393.9s]     going to result in much better websites
+[395.5s]     on the first try. All right, so I
+[397.0s]     started off by saying I just dropped in
+[398.6s]     a video called blendercling.mpp4.
+[401.5s]     Help me create a one-page product
+[403.5s]     landing page for this product. It should
+[406.1s]     be modern. It should feel very
+[407.8s]     professional. It should have smooth
+[409.5s]     animations and design throughout. All of
+[412.0s]     the text should be easy to read. And the
+[413.8s]     background of the website should be
+[416.3s]     completely black. It should be a dark
+[417.9s]     mode. and it should blend into the
+[420.3s]     background of the Blender Cling image so
+[422.9s]     that it looks like it is one, you know,
+[425.0s]     fluid web page. So, if you were really
+[427.2s]     doing this for a product or for a
+[428.6s]     business, you'd probably want to prompt
+[429.8s]     it with some more information, but I'm
+[431.3s]     just going to show you guys for now how
+[432.6s]     this works. I'm going to shoot that off
+[433.8s]     in plan mode, and you will see that it
+[435.5s]     naturally comes back and asks me some
+[437.0s]     questions. Now, if you're wondering how
+[438.5s]     I was able to speak right into my cloud
+[440.2s]     code, then check the description for my
+[441.9s]     tool. Now, one thing you'll notice once
+[443.4s]     you read through the way that this works
+[444.7s]     is that you will have to have ffmpeg
+[447.1s]     which basically just extracts frames
+[449.2s]     from videos. It's a free tool and if you
+[451.4s]     don't have it installed, Claude Code
+[452.7s]     will help you install it. It'll just do
+[454.0s]     it for you, so don't worry about that.
+[455.7s]     But now you can see it's asking us some
+[457.0s]     questions. So, the first one is, what is
+[458.6s]     the product name and brand for this
+[459.9s]     blender? And I'm just going to go ahead
+[461.2s]     and say create fictional branding just
+[463.0s]     like it did for the Vanta 1, which was
+[465.3s]     the camera website. Then it says, what
+[467.4s]     kind of content sections do you want?
+[468.9s]     I'm just going to go with the full
+[470.2s]     premium, which is what we've been doing
+[471.5s]     for the other example sites. But of
+[473.6s]     course, this is where you could
+[474.6s]     customize it a little bit to fit your
+[477.0s]     needs. And if you've never used Cloud
+[478.6s]     Code before, what's happening here is
+[480.8s]     you are basically able to look at
+[482.4s]     everything that Cloud Code is thinking
+[483.8s]     and doing. You can see a task, you can
+[485.9s]     see a glob, you can see what it's
+[487.2s]     reading, and you'll see later when it
+[488.6s]     actually starts implementing things,
+[489.9s]     it'll create itself a task list or a
+[491.6s]     to-do list, and you can actually watch
+[493.1s]     it fulfill those to-dos. So, it's really
+[495.2s]     cool. Okay, so now we at the point where
+[497.0s]     the plan is done. We've got Obsidian
+[498.8s]     Vortex premium blender landing page.
+[501.0s]     We've got the brand identity here. So,
+[502.9s]     Obsidian, Obsidian Vortex. The tagline
+[505.1s]     is annihilate everything. The accent
+[507.4s]     color is blood red. And we've got fonts.
+[509.9s]     We've got the video details,
+[511.2s]     implementation steps. So, here is the
+[513.4s]     ffmpeg thing I was talking about. That
+[515.1s]     will extract the actual frames. Then it
+[517.8s]     will build the HTML. Then it will create
+[519.7s]     all these different sections. It will
+[520.9s]     build the CSS. It'll build the JS. And
+[523.1s]     then it will test locally. So, before
+[525.0s]     this actually goes anywhere on the web,
+[526.5s]     we will test it right here. And then if
+[527.8s]     we're good with it, we can push it to
+[529.1s]     the web. And I'll show you guys that at
+[530.5s]     the end of the video. So I'm actually
+[531.8s]     just going to make one more suggestion
+[532.8s]     and then we'll let it start building. I
+[534.5s]     want to say this looks pretty much
+[536.2s]     there. There's one thing that I forgot
+[537.6s]     to mention, which is that I want the
+[539.4s]     product video to be kind of right
+[541.5s]     aligned. So I want it to be on the right
+[543.1s]     2/3 of the page and all the text can be
+[546.4s]     left aligned. And this is just to show
+[548.0s]     you that you do have control over the
+[549.7s]     way it looks. So I'm going to go ahead
+[550.9s]     and shoot this off. It's going to come
+[551.9s]     back with another plan and I'm going to
+[553.7s]     accept it and then I'll check in with
+[555.0s]     you guys when we have our first
+[556.6s]     iteration of this website done. And by
+[558.8s]     the way, now that I've accepted the
+[560.1s]     plan, I put it in bypass permissions
+[562.0s]     mode so that it can just continue to run
+[563.6s]     without stopping all the time to ask me
+[565.1s]     questions. Here is the to-do list that I
+[566.9s]     talked about. It's going to go through
+[568.0s]     and make sure that all of these are good
+[569.9s]     to go. All right, so in just a few
+[571.5s]     minutes that came back and it says, as
+[573.1s]     you can see, the site is live at
+[574.6s]     localhost. Open it up in your browser
+[576.3s]     and check it out. So let me go ahead and
+[578.0s]     open this up and we will see what we
+[579.4s]     got. So, you just saw the Obsidian
+[580.8s]     loading. We've got Obsidian Vortex. It
+[582.6s]     looks really clean so far. Now, let's
+[584.6s]     see what happens when I start to scroll
+[585.8s]     down. So, we see the blender starts to
+[588.4s]     appear. Nice. And as I continue to
+[590.2s]     scroll, we have we didn't build another
+[591.8s]     blender. We engineered a force of nature
+[593.6s]     that reduces anything to nothing in
+[595.8s]     absolute silence. As I keep scrolling,
+[597.7s]     we can see that the fruit is starting to
+[599.0s]     appear. So, we've got meet the obsidian
+[601.1s]     vortex machine from aerospace grade
+[603.4s]     stainless steel blah blah blah. There's
+[605.0s]     also text in the background as you can
+[606.8s]     see that says I think it says obliterate
+[609.3s]     everything. So that's pretty cool. We've
+[611.2s]     got brushless motor. We've got titanium
+[614.3s]     blade array. So that actually kind of
+[615.5s]     pops in a little bit late as you can
+[616.9s]     see. As I'm scrolling it pops in a bit
+[618.9s]     late. This one comes through. And then
+[621.0s]     we've got these stats that come up.
+[623.0s]     Really nice. And then we have the last
+[625.0s]     blender you'll ever own. And then I
+[626.6s]     should have the CTA right here which is
+[628.9s]     own the force. Pre-order the Obsidian
+[630.7s]     Vortex. So let's just actually think
+[632.5s]     about that. I dropped in a prompt that
+[634.7s]     said, "Here's a video. Create a onepage
+[637.0s]     landing page." That was basically it. It
+[639.3s]     used the skill and it created a plan for
+[641.4s]     us. And then we actually had a website
+[643.7s]     where pretty much everything is perfect.
+[645.4s]     Obviously, there's a few things that we
+[646.6s]     need to iterate upon, but this is super
+[648.8s]     super clean and the animation I think
+[650.7s]     looks really good. But the the biggest
+[652.5s]     problem that I'm noticing is right here
+[653.9s]     when we scroll to number two feature, we
+[656.4s]     really don't get to see it unless we
+[657.9s]     scroll back down. So, what I'm going to
+[659.4s]     do now is I'm going to go ahead and
+[660.6s]     clear this out because we're at 53%
+[662.6s]     context, so I don't want to mess with
+[664.5s]     context rot. And I'm going to once again
+[666.1s]     go back into plan mode. All right. So, I
+[667.8s]     just tested out the Blender website and
+[670.9s]     it looks really good. I do have one
+[672.4s]     piece of feedback though. When we're
+[674.3s]     scrolling down and we see the features,
+[676.5s]     feature number two doesn't actually
+[678.2s]     appear until it's basically off the
+[680.4s]     screen. So, we need that to actually
+[682.3s]     come into view a bit earlier. But
+[684.7s]     besides that, all the other features,
+[686.5s]     features 1, three, and four are working
+[688.1s]     well. So, I'll shoot that off. And while
+[689.5s]     it's coming up with a plan, I just want
+[691.0s]     to make sure that that was accurate.
+[692.2s]     Feature three looks good. And we don't
+[693.9s]     even have feature four. So, hopefully it
+[695.4s]     can understand, read through the code,
+[697.1s]     and see what's going on. So, while this
+[698.9s]     is creating a plan, I thought that I
+[700.1s]     would real quick explain the difference
+[701.7s]     between local host and actually having
+[703.9s]     something on the web. Because if you've
+[705.3s]     never built a website before in cloud
+[706.7s]     code, that part might not click yet. So,
+[709.5s]     what happens is we kind of have two
+[710.7s]     different environments. We've got our
+[712.1s]     local computer and then we've got the
+[713.8s]     actual cloud. So remember when Cloud
+[715.4s]     Code said, "Hey, cool. Your website's
+[716.8s]     live. You can go ahead and test it on
+[718.6s]     localhost port 51006."
+[721.8s]     If you right now typed this into your
+[723.4s]     browser, you'd probably get nothing. But
+[725.2s]     I can type it in because it lives on my
+[727.5s]     machine locally because what's going on
+[729.5s]     is Claude Code is helping us write all
+[732.0s]     of the actual code because that's really
+[733.5s]     what a website is. It's a bunch of code.
+[735.4s]     Whether that's HTML or JS or CSS or
+[738.2s]     whatever it is, it's code. And so what
+[740.2s]     we're doing right now is we're using it
+[741.8s]     to build code and then we're testing it.
+[743.5s]     And then we're going back and forth on
+[744.8s]     our computer until we're good. And then
+[746.9s]     once we actually like the code, we push
+[748.8s]     it to somewhere on the cloud so that it
+[750.5s]     can actually be viewed by other people.
+[752.9s]     So I'll cover this pipeline once we
+[754.6s]     actually get to that stage in the video.
+[756.0s]     But I thought that I would address this
+[757.2s]     kind of like local thing first real
+[759.1s]     quick. All right. You can see it came
+[760.7s]     back with a plan to fix the Blender
+[762.2s]     feature number two late appearance. I'm
+[763.6s]     just going to go ahead and accept this.
+[764.8s]     Okay. So it did that really fast. I'm
+[766.2s]     going to click into this website and
+[767.4s]     we'll see if that fix has actually been
+[769.6s]     changed. We've got feature one. We've
+[771.9s]     got feature two. There we go. And we've
+[774.0s]     got feature three. And everything else
+[775.4s]     still looks intact with the site. So all
+[777.8s]     of the magic that's happening here is
+[779.4s]     once again within the skill that I
+[781.0s]     built. So it is the video to website
+[783.0s]     skill. If I open this up, this is
+[784.6s]     basically just a markdown file and it
+[786.2s]     says turn a video into a premium scroll
+[788.2s]     driven animated website. So this is
+[790.1s]     where all the secret sauce really lives
+[791.8s]     on how it actually does this. I know
+[793.7s]     that this is a pretty beefy skill, but
+[796.2s]     hey, I mean, it seems to be working
+[798.1s]     pretty well. And what you can do now is
+[799.8s]     every time you're using this skill to
+[801.1s]     build websites, you would just say,
+[803.0s]     "Awesome. Here's what I told you to fix.
+[805.0s]     Here's what I like. Here's what I don't
+[806.1s]     like. Make sure that all of this is
+[807.6s]     reflected on the skill.md." So
+[809.8s]     essentially, every single time that you
+[811.0s]     build a website with this skill, the
+[812.6s]     skill gets better and better and better.
+[815.0s]     Now, we have our code that we like, and
+[817.5s]     it's time to push it over here. So, what
+[819.4s]     we need to do is we're going to use a
+[820.6s]     combination of GitHub and Versel. GitHub
+[823.0s]     basically just lets us store code. So
+[825.7s]     basically the same way you would have
+[826.9s]     maybe like a word file locally on your
+[828.6s]     computer. If you wanted other people to
+[830.2s]     be able to use that, you would have to
+[831.3s]     put that on one drive or you know uh
+[834.3s]     Google doc so that other people could
+[835.9s]     look at the different versions and
+[837.2s]     collaborate on it. And then what happens
+[839.0s]     is we sync up Verscell to our GitHub so
+[841.5s]     that we can actually deploy that code
+[843.3s]     onto a real URL so that it's no longer
+[845.3s]     just like a local host URL. First thing
+[847.3s]     you want to do is go over to GitHub and
+[848.9s]     create an account. It's completely free
+[850.4s]     and it has been around for tons and tons
+[852.6s]     of years. It is a industry standard for
+[854.4s]     code. And then the second thing that
+[855.8s]     you're going to do is go over to
+[857.0s]     Verscell and create an account over here
+[858.5s]     as well. So what's cool is we can
+[860.2s]     basically have Claude Code do this
+[861.8s]     entire pipeline for us. It's super super
+[863.5s]     simple. So if you haven't yet connected
+[865.3s]     your Claude code to your GitHub, you
+[867.1s]     would just come in here, maybe clear out
+[868.4s]     the conversation and say, "Help me
+[870.4s]     connect to GitHub so that I can push
+[872.5s]     this code base to my GitHub repository."
+[875.2s]     And what it can do is it can help you
+[876.6s]     basically use the CLI to authenticate.
+[878.8s]     Meaning it will basically just have a
+[880.3s]     popup for you and all you have to do is
+[881.6s]     sign in. It's super simple. So here you
+[883.4s]     can see it says you're already
+[884.3s]     authenticated with GitHub as Nate Herki.
+[886.6s]     Nice. Now the next step is to say
+[889.0s]     awesome. Now let's go ahead and create a
+[891.6s]     new GitHub repository for me. You can
+[893.4s]     just call it blender- website and push
+[895.8s]     the code base for the Blender website
+[897.7s]     into that repository. Now because we're
+[899.9s]     pushing something to GitHub and because
+[901.9s]     it's going to go on the web, this is
+[903.3s]     where you'd want to be careful if you
+[904.6s]     had like API keys or anything sensitive
+[906.6s]     in there. In this case, we have
+[908.1s]     literally nothing to worry about, but
+[910.0s]     that is something just to keep in mind.
+[911.5s]     All right, nice. So, your Blender
+[913.1s]     website is now live on GitHub. Here's
+[914.7s]     everything that it did. And it also says
+[916.3s]     if you want to connect this to Versel
+[917.6s]     for auto deploys, you can import the
+[919.2s]     repo from the Versell dashboard. So,
+[921.6s]     first let's just check in on this GitHub
+[923.8s]     repo. We can see that this has been set
+[925.7s]     up. We have one commit, which is the one
+[927.3s]     that we just did. And that's important
+[929.0s]     because every time we make a change, we
+[930.8s]     can see exactly what happened to the
+[932.2s]     code here. Now, what you'll notice is
+[933.4s]     that this is a public repository. You
+[935.2s]     could go into the settings and you could
+[936.5s]     make this private and it would still be
+[938.0s]     able to auto deploy to Verscell, no
+[939.7s]     problem. And now that we're in Versell,
+[941.4s]     all I have to do is come here to
+[942.9s]     projects and click on add new. And then
+[945.0s]     what you'll notice is right here because
+[946.4s]     I've signed into Verscell with my
+[947.8s]     GitHub, it says import GitHub
+[949.5s]     repository. And all I can do is choose
+[951.3s]     right here Blender-Seite. Click import.
+[953.7s]     And this is automatically just going to
+[955.0s]     build up this site for us. So I'll hit
+[956.9s]     deploy. And then we'll let this spin up.
+[958.7s]     And I'll show you guys that this is now
+[960.7s]     accessible on the web. Awesome. So you
+[963.4s]     just deployed a new project to Nate Her
+[964.9s]     projects. Let's go ahead and continue
+[966.2s]     into the dashboard here. All right. So
+[967.7s]     something interesting just happened and
+[968.9s]     I'm glad it did so I can show you guys
+[970.6s]     how to fix it. So our project is now
+[973.4s]     here on Verscell and when I click into
+[975.4s]     the domain everything seems to load up,
+[977.1s]     right? Right. We've got Obsidian Vortex.
+[978.7s]     We see the animations come through. But
+[980.3s]     as I start to scroll, where's our
+[982.5s]     Blender? We still get the text coming
+[984.4s]     through. We still get all these
+[985.8s]     animations that we were looking for, but
+[987.3s]     our Blender is not there. So what
+[989.0s]     happened was when it pushed this GitHub
+[990.9s]     repo, it excluded the frames. So if I
+[993.8s]     come over to the left hand side and we
+[994.9s]     go to our Blender project and we open up
+[996.7s]     the frames, you can see that all of
+[998.2s]     these were grayed out, which basically
+[999.8s]     means everything got pushed to GitHub in
+[1001.5s]    this folder except for the frames, which
+[1003.8s]    means when the site tries to render it,
+[1005.3s]    there's no frames to actually render. So
+[1007.0s]    what I did is I said, "Okay, that didn't
+[1008.6s]    work. You need to have the frames in the
+[1010.3s]    codebase so that it can actually use it,
+[1011.9s]    otherwise the animation just
+[1013.0s]    disappears." So I told it to update
+[1015.0s]    those changes, make another push. It
+[1017.0s]    fixed that and then basically it came
+[1018.9s]    back and said okay I did that now the
+[1021.2s]    frames are in the GitHub repo. If I go
+[1023.3s]    to the GitHub repo you can see that we
+[1024.6s]    now have two commits. If I click into
+[1026.3s]    the commits you can see nice the second
+[1028.1s]    one added animation frames for Verscell
+[1030.4s]    deployment. And then in Verscell if I go
+[1032.6s]    to deployments you can see that we had
+[1034.3s]    two. We had this current one that I
+[1035.7s]    rolled back to so I could show you guys
+[1037.3s]    and then we have this main production
+[1038.7s]    one which I could go to and we could
+[1041.1s]    actually roll up to this one. So I could
+[1043.2s]    click on these three dots and then click
+[1044.6s]    on redeploy. And now that I have
+[1046.5s]    redeployed, if I open up this Blender
+[1048.6s]    website one more time and we come down
+[1050.6s]    and we start to scroll, we can now see
+[1052.1s]    that the frames are being rendered and
+[1053.4s]    we still have all of the animations that
+[1055.1s]    we had built. And now the site is
+[1057.4s]    actually ready to go. And just to prove
+[1059.2s]    to you guys that this really is on the
+[1060.4s]    cloud, you can see on my phone we have
+[1062.3s]    the Blender website with the animations.
+[1064.2s]    Now, obviously, this hasn't been yet
+[1065.7s]    optimized for mobile, which would kind
+[1067.3s]    of be the next step, but you can see the
+[1069.0s]    animations are still here. And if it
+[1071.4s]    hasn't quite stuck yet, here's the
+[1073.2s]    advantage of doing it like this. Now
+[1075.4s]    that we have our site on the web, which
+[1077.3s]    maybe customers would be looking at and
+[1078.8s]    interfacing with, what if we wanted to
+[1080.5s]    change something like the colors or
+[1081.8s]    maybe even change the animation, we
+[1083.8s]    don't want to be changing what's
+[1084.9s]    actually out there in production in real
+[1086.6s]    time. So, we can change the code, we can
+[1088.6s]    test on a local host, and then once
+[1090.2s]    we're finally good with it, we push it
+[1091.8s]    to GitHub and then it automatically
+[1093.1s]    syncs to our real domain. So, that way
+[1095.0s]    we have basically a testing environment,
+[1097.1s]    a staging environment, and then we have
+[1098.7s]    our actual production website. And what
+[1100.6s]    you guys saw is that this literally took
+[1102.1s]    me like 30 minutes. And obviously if I
+[1104.2s]    spend another 30 minutes, the site could
+[1105.8s]    be like five times better. And this is
+[1107.3s]    crazy because there's so many businesses
+[1108.6s]    out there, whether they're local in your
+[1110.3s]    area or you know, you look online that
+[1112.6s]    have horrible websites because they
+[1114.3s]    don't want to prioritize it or they
+[1115.4s]    don't want to pay some web design agency
+[1117.4s]    tens of thousands of dollars for a new
+[1119.2s]    website. That could also take
+[1120.6s]    potentially months. Whereas what you
+[1122.3s]    could do is you could find prospects.
+[1123.9s]    You could find some sort of niche. So
+[1125.1s]    let's say you want to design websites
+[1126.5s]    for blender companies. You could build a
+[1128.6s]    demo site similar to this, right? Like
+[1130.2s]    you could build something like this in
+[1131.9s]    one day if you sat down and you wanted
+[1133.6s]    to make it really really good. And then
+[1135.5s]    you email them the link or you walk in
+[1137.2s]    and you show them and say I can build
+[1138.6s]    this for you with your products with
+[1140.4s]    your copy and I can get that to you in 2
+[1142.4s]    days and I can charge you know $5 to
+[1144.6s]    $10,000 which is a lot cheaper than they
+[1146.5s]    might get with other vendors. And then
+[1148.6s]    of course on top of that you could do
+[1150.0s]    monthly hosting, you could have
+[1151.2s]    maintenance which is recurring revenue.
+[1153.0s]    But it also ensures for them that if
+[1154.5s]    they need any different features, you
+[1156.1s]    can fix that codebase and you can push
+[1157.6s]    that all up there because you understand
+[1159.1s]    how this all works now. So maybe you
+[1161.4s]    don't like the style of how I'm doing
+[1162.9s]    this with the different, you know, text
+[1164.4s]    coming through and maybe like this
+[1165.8s]    animation overlay thing. Then just
+[1167.4s]    update the skill so that your cloud code
+[1169.6s]    doesn't actually do that. And once you
+[1171.3s]    now actually understand how all we're
+[1173.2s]    doing is we're turning videos into a
+[1174.8s]    bunch of frames and then having it
+[1176.6s]    scroll through, you'll be able to do so
+[1178.2s]    much more because it doesn't just have
+[1179.5s]    to be product spinning or you know X-ray
+[1181.8s]    vision. It can be words. It can be like
+[1183.9s]    walking. It can be whatever you want.
+[1185.5s]    You can also you can go to this website
+[1187.3s]    awards with three Ws for some
+[1188.6s]    inspiration on animations. It is super
+[1190.7s]    super cool what people are doing here.
+[1192.5s]    But that is going to do it for today. If
+[1193.9s]    you guys love nerding out about this
+[1195.3s]    kind of stuff, then definitely check out
+[1196.6s]    my plus community. The link for that is
+[1198.1s]    down in the description. We've got a
+[1199.4s]    great community of over 3,000 members
+[1200.7s]    who are building with AI every day,
+[1202.1s]    building businesses with AI. And if you
+[1203.8s]    have similar goals, it's a great spot to
+[1205.2s]    be. But anyways, if you enjoyed the
+[1206.7s]    video or you learned something new,
+[1207.9s]    please give it a like. It definitely
+[1208.9s]    helps me out a ton. And as always, I
+[1210.6s]    appreciate you guys making it to the end
+[1211.8s]    of the video. I'll see you on the next
+[1213.1s]    one. Thanks everyone.
+
+==================================================
+Total lines: 695

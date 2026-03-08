@@ -1,0 +1,44 @@
+[
+  {
+    "scene_id": 1,
+    "title": "The Challenge of Technology Integration",
+    "narration_text": "India's higher education system educates over 40 million students. Despite the National Education Policy 2020 advocating for technology in teaching, many educators struggle with creating multimedia content due to technical barriers.",
+    "visual_description": "A map of India highlighting major universities and a split-screen showing an educator struggling with video editing software on one side and a student watching a well-produced educational video on the other.",
+    "audio_path": "output/audio/narration_1.wav"
+  },
+  {
+    "scene_id": 2,
+    "title": "The Gap in Technical Proficiency",
+    "narration_text": "While video-based learning is highly effective, many educators lack the skills for video editing and content optimization. This creates an inequitable environment where only technically skilled instructors can fully utilize this teaching method.",
+    "visual_description": "A bar graph showing a gap between technical proficiency levels among educators, with icons representing different skill levels.",
+    "audio_path": "output/audio/narration_2.wav"
+  },
+  {
+    "scene_id": 3,
+    "title": "Introducing the YouTube AI Agent Framework",
+    "narration_text": "To bridge this gap, we introduce a YouTube AI Agent framework. This multi-agent system simplifies video content creation, making it accessible for all educators.",
+    "visual_description": "A diagram showing the four components of the framework: Research Agent, Script Agent, Text-to-Speech Engine, and Video Creator.",
+    "audio_path": "output/audio/narration_3.wav"
+  },
+  {
+    "scene_id": 4,
+    "title": "Components of the Framework",
+    "narration_text": "The framework includes a Research Agent analyzing successful videos, a Script Agent creating evidence-based scripts, a multilingual Text-to-Speech Engine, and an automated Video Creator.",
+    "visual_description": "Four separate boxes each labeled with one component. Each box contains icons representing its function: magnifying glass for Research Agent, pen for Script Agent, speech bubble for Text-to-Speech Engine, and film reel for Video Creator.",
+    "audio_path": "output/audio/narration_4.wav"
+  },
+  {
+    "scene_id": 5,
+    "title": "Framework in Action",
+    "narration_text": "We demonstrate the framework's effectiveness with a Python programming lesson. Educators can now produce professional-quality videos quickly, adapting to their technical comfort levels.",
+    "visual_description": "A split-screen showing an educator using the framework on one side and a student watching the resulting video on the other.",
+    "audio_path": "output/audio/narration_5.wav"
+  },
+  {
+    "scene_id": 6,
+    "title": "Empowering Educators for Quality Education",
+    "narration_text": "By lowering technical barriers, this framework empowers educators to create engaging content, aligning with NEP 2020's vision of quality education for all. It ensures functionality even in resource-constrained settings.",
+    "visual_description": "A globe showing India with rays of light spreading outwards, symbolizing empowerment and accessibility, ending on a classroom where students are engaged with digital devices.",
+    "audio_path": "output/audio/narration_6.wav"
+  }
+]
