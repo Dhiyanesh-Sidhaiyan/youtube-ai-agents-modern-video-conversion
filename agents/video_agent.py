@@ -130,11 +130,27 @@ def assemble_scene(scene: dict, audio_path: str | None, mp4_path: str | None) ->
         video_clip = VideoFileClip(mp4_path).with_effects([Resize(VIDEO_SIZE)])
         # Match video duration to audio
         if video_clip.duration < audio_duration:
-            # Freeze on last frame instead of going to blank screen
+            # Freeze on a content frame (not the last frame which may be blank due to FadeOut)
             extra_duration = audio_duration - video_clip.duration
-            last_frame = video_clip.get_frame(video_clip.duration - 0.01)
+
+            # Find the best frame to freeze on (70% through video, before fade out)
+            # Try multiple positions to find a non-blank frame
+            best_frame = None
+            for ratio in [0.7, 0.5, 0.8, 0.6, 0.9, 0.4]:
+                frame_time = video_clip.duration * ratio
+                candidate_frame = video_clip.get_frame(frame_time)
+                # Check if frame has content (not mostly black)
+                avg_brightness = candidate_frame.mean()
+                if avg_brightness > 15:  # Not a blank/black frame
+                    best_frame = candidate_frame
+                    break
+
+            # Fallback to 50% if all frames seem dark
+            if best_frame is None:
+                best_frame = video_clip.get_frame(video_clip.duration * 0.5)
+
             freeze_clip = (
-                ImageClip(last_frame)
+                ImageClip(best_frame)
                 .with_duration(extra_duration)
                 .with_fps(video_clip.fps or FPS)
             )

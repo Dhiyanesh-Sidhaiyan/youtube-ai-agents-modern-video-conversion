@@ -19,6 +19,11 @@ REVIEWER_MODEL = "llama3.2:3b"  # fast 3B model for review pass
 MAX_RETRIES = 3
 OLLAMA_TIMEOUT = 300  # seconds — phi4 14B needs time on CPU/low-VRAM
 
+# Per-scene self-refine settings
+ENABLE_SELF_REFINE = True  # Set to False to disable per-scene evaluation loop
+QUALITY_THRESHOLD = 80.0   # Minimum score to pass (0-100)
+MAX_REFINE_ITERATIONS = 3  # Max attempts per scene
+
 WRITER_PROMPT = """You are a Manim Community Edition expert. Write a complete, self-contained
 Manim scene class for the following visual description.
 
@@ -144,12 +149,27 @@ def _find_rendered_mp4(class_name: str, search_root: str) -> str | None:
     return None
 
 
-def generate_scene(scene: dict, scenes_dir: str) -> str | None:
+def generate_scene(
+    scene: dict,
+    scenes_dir: str,
+    feedback: str | None = None
+) -> str | None:
     """
     Generate and render a Manim scene.
-    First tries to use a pre-built topic-specific scene; then falls back
-    to the LLM Writer+Reviewer loop; then to a generic animated fallback.
-    Returns path to rendered MP4 or None on failure.
+    Priority order:
+    1. Dynamic templates (if scene_type is present) - for transcript-based content
+    2. Pre-built topic-specific scenes (if scene_id in PREBUILT_SCENES) - legacy
+    3. LLM Writer+Reviewer loop
+    4. Generic animated fallback
+
+    Args:
+        scene: Scene dict with scene_id, title, visual_description, etc.
+        scenes_dir: Directory to save scene Python files.
+        feedback: Optional feedback from previous iterations (for self-refine loop).
+                  Contains issues and suggestions to address.
+
+    Returns:
+        Path to rendered MP4 or None on failure.
     """
     scene_id = scene["scene_id"]
     title = scene["title"]
@@ -159,7 +179,31 @@ def generate_scene(scene: dict, scenes_dir: str) -> str | None:
 
     print(f"\n[Animation Agent] Scene {scene_id}: {title}")
 
-    # ── Priority 1: Use pre-built animated scene if available ───────────────
+    # ── Priority 1: Dynamic templates (for transcript-based scripts) ────────
+    scene_type = scene.get("scene_type")
+    if scene_type:
+        try:
+            from agents.scene_templates import generate_scene_code, SCENE_TEMPLATES
+            if scene_type in SCENE_TEMPLATES:
+                print(f"  Using dynamic template: {scene_type}")
+                code = generate_scene_code(scene)
+                if code:
+                    with open(scene_file, "w") as f:
+                        f.write(code)
+                    success, err = render_manim(
+                        scene_file, class_name, os.path.dirname(scenes_dir)
+                    )
+                    if success:
+                        mp4 = _find_rendered_mp4(class_name, os.path.dirname(scenes_dir))
+                        if mp4:
+                            print(f"  Dynamic template rendered: {mp4}")
+                            return mp4
+                    print(f"  Template render failed ({err[-150:]}). Trying fallbacks.")
+        except ImportError:
+            pass  # scene_templates not available, continue with fallbacks
+    # ────────────────────────────────────────────────────────────────────────
+
+    # ── Priority 2: Use pre-built animated scene if available (legacy) ──────
     from agents.prebuilt_scenes import PREBUILT_SCENES
     if scene_id in PREBUILT_SCENES:
         print(f"  Using pre-built animated scene.")
@@ -185,6 +229,11 @@ def generate_scene(scene: dict, scenes_dir: str) -> str | None:
             visual_description=visual_desc,
             title=title,
         )
+
+        # Inject feedback from self-refine loop (quality issues from previous iterations)
+        if feedback:
+            writer_prompt += f"\n\n{feedback}"
+
         if attempt > 1 and code:
             writer_prompt += f"\n\nPrevious attempt failed with this error:\n{last_error}\nFix the code."
 
@@ -223,18 +272,71 @@ def generate_scene(scene: dict, scenes_dir: str) -> str | None:
 
 
 def generate_all_scenes(script_path: str, scenes_dir: str) -> list[dict]:
-    """Generate animations for all scenes in the script. Returns scene list with mp4_path."""
+    """
+    Generate animations for all scenes in the script with per-scene evaluation.
+
+    When ENABLE_SELF_REFINE is True (default), each scene goes through a
+    Generate → Evaluate → Feedback → Refine loop until it passes the quality
+    threshold or max iterations are reached.
+
+    Returns:
+        List of scene dicts with mp4_path and quality_score added.
+    """
     with open(script_path) as f:
         script = json.load(f)
 
     os.makedirs(scenes_dir, exist_ok=True)
     results = []
+    evaluations = []
+
+    # Use self-refine loop if enabled
+    if ENABLE_SELF_REFINE:
+        try:
+            from agents.scene_evaluator import (
+                generate_with_self_refine,
+                evaluate_all_scenes_summary,
+            )
+            use_self_refine = True
+            print(f"\n[Animation Agent] Self-refine enabled (threshold: {QUALITY_THRESHOLD})")
+        except ImportError:
+            use_self_refine = False
+            print("\n[Animation Agent] Self-refine disabled (scene_evaluator not found)")
+    else:
+        use_self_refine = False
+        print("\n[Animation Agent] Self-refine disabled by config")
 
     for scene in script["scenes"]:
-        mp4_path = generate_scene(scene, scenes_dir)
-        results.append({**scene, "mp4_path": mp4_path})
+        scene_id = scene["scene_id"]
 
-    print(f"\n[Animation Agent] Done. {sum(1 for r in results if r['mp4_path'])} / {len(results)} scenes rendered.")
+        if use_self_refine:
+            # Use self-refine loop for quality assurance
+            mp4_path, eval_result = generate_with_self_refine(
+                scene=scene,
+                scenes_dir=scenes_dir,
+                generate_fn=generate_scene,
+                threshold=QUALITY_THRESHOLD,
+                max_iter=MAX_REFINE_ITERATIONS,
+            )
+            evaluations.append(eval_result)
+            results.append({
+                **scene,
+                "mp4_path": mp4_path,
+                "quality_score": eval_result.overall_score,
+                "passed_threshold": eval_result.passed_threshold,
+            })
+        else:
+            # Direct generation without evaluation loop
+            mp4_path = generate_scene(scene, scenes_dir)
+            results.append({**scene, "mp4_path": mp4_path})
+
+    # Print summary
+    rendered = sum(1 for r in results if r.get("mp4_path"))
+    print(f"\n[Animation Agent] Done. {rendered}/{len(results)} scenes rendered.")
+
+    if use_self_refine and evaluations:
+        summary = evaluate_all_scenes_summary(evaluations)
+        print(f"  Quality: {summary['avg_score']} avg, {summary['passed']}/{summary['total_scenes']} passed")
+
     return results
 
 

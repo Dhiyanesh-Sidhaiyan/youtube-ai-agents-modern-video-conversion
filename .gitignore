@@ -1,1 +1,62 @@
 venv/
+__pycache__/
+**/__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.swp
+.DS_Store
+.idea/
+.vscode/
+*.log
+*.bak
+*.tmp
+*.egg-info/
+dist/
+build/
+*.egg
+*.manifest
+*.spec
+*.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.coverage
+.cache
+.pytest_cache/
+nosetests.xml
+coverage.xml
+*.coverrc
+*.coverage
+*.log
+*.pot
+
+# Project-specific output
+output/
+tmp*/
+
+# Claude Code
+.claude/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Additional virtual environments
+env/
+ENV/
+.venv/
+
+# Additional Python patterns
+*.py[cod]
+*$py.class
+*.whl
+
+# macOS nested
+**/.DS_Store
+
+# Windows
+Thumbs.db
+Desktop.ini
