@@ -1,0 +1,109 @@
+{
+  "summary": {
+    "total_scenes": 10,
+    "rendered_scenes": 10,
+    "failed_scenes": 0,
+    "render_success_rate": "100.0%",
+    "total_duration": "94.4s",
+    "overall_score": "82.0/100"
+  },
+  "scores": {
+    "technical": "100.0",
+    "visual": "100.0",
+    "timing": "50.0",
+    "content": "60.0",
+    "spelling": "100.0"
+  },
+  "scenes": [
+    {
+      "scene_id": 1,
+      "title": "Introduction to LLMs in Enterprises",
+      "scene_type": "intro",
+      "render_success": true,
+      "duration": "7.8s",
+      "score": "85.0",
+      "issues": []
+    },
+    {
+      "scene_id": 2,
+      "title": "Understanding Prompts as Executable Logic",
+      "scene_type": "concept",
+      "render_success": true,
+      "duration": "10.7s",
+      "score": "80.0",
+      "issues": []
+    },
+    {
+      "scene_id": 3,
+      "title": "Real-World Failures: Lessons Learned",
+      "scene_type": "example",
+      "render_success": true,
+      "duration": "8.6s",
+      "score": "80.0",
+      "issues": []
+    },
+    {
+      "scene_id": 4,
+      "title": "Historical Computing Paradigms vs. LLMs",
+      "scene_type": "comparison",
+      "render_success": true,
+      "duration": "8.8s",
+      "score": "80.0",
+      "issues": []
+    },
+    {
+      "scene_id": 5,
+      "title": "Building Applications with LLMs",
+      "scene_type": "process",
+      "render_success": true,
+      "duration": "9.6s",
+      "score": "90.0",
+      "issues": []
+    },
+    {
+      "scene_id": 6,
+      "title": "The Nature of Prompts in LLMs",
+      "scene_type": "concept",
+      "render_success": true,
+      "duration": "10.7s",
+      "score": "80.0",
+      "issues": []
+    },
+    {
+      "scene_id": 7,
+      "title": "LLMs in Action: A Chatbot Example",
+      "scene_type": "example",
+      "render_success": true,
+      "duration": "8.6s",
+      "score": "80.0",
+      "issues": []
+    },
+    {
+      "scene_id": 8,
+      "title": "Deterministic vs. Stochastic Outputs",
+      "scene_type": "comparison",
+      "render_success": true,
+      "duration": "8.8s",
+      "score": "80.0",
+      "issues": []
+    },
+    {
+      "scene_id": 9,
+      "title": "Instrumenting Prompts for Success",
+      "scene_type": "process",
+      "render_success": true,
+      "duration": "10.7s",
+      "score": "85.0",
+      "issues": []
+    },
+    {
+      "scene_id": 10,
+      "title": "The Future of LLMs in Enterprises",
+      "scene_type": "conclusion",
+      "render_success": true,
+      "duration": "10.1s",
+      "score": "80.0",
+      "issues": []
+    }
+  ]
+}

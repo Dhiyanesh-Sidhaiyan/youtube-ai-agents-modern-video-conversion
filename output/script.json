@@ -1,42 +1,77 @@
 {
-  "title": "Empowering Indian Educators with AI-Driven Video Creation",
-  "total_scenes": 6,
+  "title": "Integrating Large Language Models in Enterprise Applications",
+  "total_scenes": 10,
+  "source": "youtube_transcript",
   "scenes": [
     {
       "scene_id": 1,
-      "title": "The Challenge in Indian Higher Education",
-      "narration_text": "India's higher education system educates over 40 million students. Despite the National Education Policy 2020 advocating for technology-integrated instruction, a gap exists. Many educators struggle with creating multimedia resources due to technical barriers.",
-      "visual_description": "A map of India highlighting major universities and cities. A split screen shows an educator at a computer struggling with video editing software on one side and students in a classroom on the other."
+      "scene_type": "intro",
+      "title": "Introduction to LLMs in Enterprises",
+      "narration_text": "Welcome! Today, we'll explore how Large Language Models (LLMs) are transforming enterprise applications. From healthcare to finance, these models are evolving from simple demos to complex decision-makers within codebases.",
+      "visual_description": "A title screen with 'Integrating LLMs in Enterprises' and a background of interconnected nodes representing different industries."
     },
     {
       "scene_id": 2,
-      "title": "The Potential of Video-Based Learning",
-      "narration_text": "Video-based learning is highly effective for knowledge transfer. However, creating these resources requires skills in video editing, audio production, and content optimization. This creates an inequitable situation where only technically skilled instructors can utilize this tool.",
-      "visual_description": "A dynamic graph showing the effectiveness of video-based learning. Cut to a frustrated educator trying to edit a video, with complex software tools appearing on screen."
+      "scene_type": "concept",
+      "title": "Understanding Prompts as Executable Logic",
+      "narration_text": "Prompts are more than configurations; they're executable instructions for LLMs. Unlike deterministic software, prompts can produce varied outputs due to their stochastic nature.",
+      "visual_description": "A diagram showing a prompt box leading to an LLM with arrows pointing to different output possibilities."
     },
     {
       "scene_id": 3,
-      "title": "Introducing the YouTube AI Agent Framework",
-      "narration_text": "To address these challenges, we introduce a YouTube AI Agent framework. This multi-agent system simplifies educational video creation by automating complex processes and supporting multiple Indian languages.",
-      "visual_description": "An animated diagram showing four interconnected agents labeled: Research Agent, Script Agent, Text-to-Speech Engine, and Video Creator."
+      "scene_type": "example",
+      "title": "Real-World Failures: Lessons Learned",
+      "narration_text": "Consider Chevrolet's erroneous sale or Air Canada’s chatbot mishap. These examples highlight the risks when LLM prompts are inadequately instrumented.",
+      "visual_description": "Two side-by-side case study boxes with images of a car and an airplane, each with a caution symbol."
     },
     {
       "scene_id": 4,
-      "title": "Understanding the Framework's Components",
-      "narration_text": "The framework includes a Research Agent that analyzes successful videos for effective patterns. A Script Agent then creates structured scripts based on these insights. Additionally, a Text-to-Speech Engine supports multiple Indian languages.",
-      "visual_description": "Sequential animations: 1) The Research Agent analyzing video data; 2) The Script Agent generating a script; 3) The Text-to-Speech Engine converting text into speech in Hindi."
+      "scene_type": "comparison",
+      "title": "Historical Computing Paradigms vs. LLMs",
+      "narration_text": "Just as punch cards evolved to high-level programming languages, we're now shifting towards LLMs. This requires new infrastructures for managing their unique challenges.",
+      "visual_description": "A timeline showing the evolution from punch cards to LLMs with icons representing each stage."
     },
     {
       "scene_id": 5,
-      "title": "Demonstrating the Framework's Application",
-      "narration_text": "We demonstrate the framework using Python programming pedagogy. Educators can now create professional-quality videos quickly, leveraging proven content patterns while maintaining their unique teaching style.",
-      "visual_description": "A split-screen showing an educator creating a video with the AI framework on one side and students watching the final product in class on the other."
+      "scene_type": "process",
+      "title": "Building Applications with LLMs",
+      "narration_text": "To effectively integrate LLMs, we need a robust development infrastructure. This includes risk management and ensuring operational reliability.",
+      "visual_description": "A flowchart illustrating the steps of building an application with LLM integration."
     },
     {
       "scene_id": 6,
-      "title": "Impact and Conclusion",
-      "narration_text": "By reducing technical barriers, this framework empowers educators to create engaging content efficiently. It supports NEP 2020's vision of quality education for all, especially in resource-constrained environments.",
-      "visual_description": "A closing animation showing a diverse group of educators using the AI tool across various Indian regions, with students benefiting from improved learning experiences."
+      "scene_type": "concept",
+      "title": "The Nature of Prompts in LLMs",
+      "narration_text": "Prompts are sets of instructions that guide LLMs. They can include text, images, and other contexts, making them powerful tools for executing business logic.",
+      "visual_description": "A prompt box with various input types (text, image) flowing into an LLM."
+    },
+    {
+      "scene_id": 7,
+      "scene_type": "example",
+      "title": "LLMs in Action: A Chatbot Example",
+      "narration_text": "Imagine a chatbot that issues refunds. The conversation itself becomes executable code, demonstrating the practical application of LLMs.",
+      "visual_description": "A chat interface showing a refund request and response with arrows indicating execution flow."
+    },
+    {
+      "scene_id": 8,
+      "scene_type": "comparison",
+      "title": "Deterministic vs. Stochastic Outputs",
+      "narration_text": "Unlike deterministic software where inputs yield consistent outputs, LLMs can produce different results for the same input due to their stochastic nature.",
+      "visual_description": "Two parallel diagrams: one with a calculator showing '1+1=2' and another with an LLM showing varied outputs."
+    },
+    {
+      "scene_id": 9,
+      "scene_type": "process",
+      "title": "Instrumenting Prompts for Success",
+      "narration_text": "Properly instrumented prompts are crucial. They ensure that LLMs perform reliably and effectively within enterprise applications.",
+      "visual_description": "A checklist of steps for instrumenting prompts, with a checkmark icon next to each step."
+    },
+    {
+      "scene_id": 10,
+      "scene_type": "conclusion",
+      "title": "The Future of LLMs in Enterprises",
+      "narration_text": "LLMs offer powerful capabilities but also introduce complexities. The future lies in creating robust systems to support these new paradigms, ensuring stability and efficacy.",
+      "visual_description": "A closing screen with the title 'Future of LLMs' and a network diagram showing interconnected applications."
     }
   ]
 }

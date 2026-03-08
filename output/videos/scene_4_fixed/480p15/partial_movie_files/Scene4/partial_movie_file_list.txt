@@ -1,0 +1,11 @@
+# This file is used internally by FFMPEG.
+file 'file:/Users/project/playground/youtube_transcript/output/videos/scene_4_fixed/480p15/partial_movie_files/Scene4/1584795214_3197558633_223132457.mp4'
+file 'file:/Users/project/playground/youtube_transcript/output/videos/scene_4_fixed/480p15/partial_movie_files/Scene4/4072820271_2318836581_326592435.mp4'
+file 'file:/Users/project/playground/youtube_transcript/output/videos/scene_4_fixed/480p15/partial_movie_files/Scene4/4072820271_180748858_1073499469.mp4'
+file 'file:/Users/project/playground/youtube_transcript/output/videos/scene_4_fixed/480p15/partial_movie_files/Scene4/4072820271_259787644_1052130049.mp4'
+file 'file:/Users/project/playground/youtube_transcript/output/videos/scene_4_fixed/480p15/partial_movie_files/Scene4/4072820271_3639078366_1950403483.mp4'
+file 'file:/Users/project/playground/youtube_transcript/output/videos/scene_4_fixed/480p15/partial_movie_files/Scene4/4072820271_3394500337_2601940554.mp4'
+file 'file:/Users/project/playground/youtube_transcript/output/videos/scene_4_fixed/480p15/partial_movie_files/Scene4/4072820271_2776699143_4052278097.mp4'
+file 'file:/Users/project/playground/youtube_transcript/output/videos/scene_4_fixed/480p15/partial_movie_files/Scene4/4072820271_2318836581_1359569449.mp4'
+file 'file:/Users/project/playground/youtube_transcript/output/videos/scene_4_fixed/480p15/partial_movie_files/Scene4/4072820271_3281556818_922182038.mp4'
+file 'file:/Users/project/playground/youtube_transcript/output/videos/scene_4_fixed/480p15/partial_movie_files/Scene4/4072820271_2552855209_32253980.mp4'

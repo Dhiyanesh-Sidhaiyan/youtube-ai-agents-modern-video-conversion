@@ -1,0 +1,11 @@
+# This file is used internally by FFMPEG.
+file 'file:/Users/project/playground/youtube_transcript/output/videos/scene_8/480p15/partial_movie_files/Scene8/1584795214_1529432974_223132457.mp4'
+file 'file:/Users/project/playground/youtube_transcript/output/videos/scene_8/480p15/partial_movie_files/Scene8/4072820271_2318836581_3801666520.mp4'
+file 'file:/Users/project/playground/youtube_transcript/output/videos/scene_8/480p15/partial_movie_files/Scene8/4072820271_3572859758_3884783950.mp4'
+file 'file:/Users/project/playground/youtube_transcript/output/videos/scene_8/480p15/partial_movie_files/Scene8/4072820271_259787644_4036584056.mp4'
+file 'file:/Users/project/playground/youtube_transcript/output/videos/scene_8/480p15/partial_movie_files/Scene8/4072820271_2621834503_852731582.mp4'
+file 'file:/Users/project/playground/youtube_transcript/output/videos/scene_8/480p15/partial_movie_files/Scene8/4072820271_3394500337_2412718782.mp4'
+file 'file:/Users/project/playground/youtube_transcript/output/videos/scene_8/480p15/partial_movie_files/Scene8/4072820271_2776699143_581919205.mp4'
+file 'file:/Users/project/playground/youtube_transcript/output/videos/scene_8/480p15/partial_movie_files/Scene8/4072820271_2318836581_5710283.mp4'
+file 'file:/Users/project/playground/youtube_transcript/output/videos/scene_8/480p15/partial_movie_files/Scene8/4072820271_3281556818_495077553.mp4'
+file 'file:/Users/project/playground/youtube_transcript/output/videos/scene_8/480p15/partial_movie_files/Scene8/4072820271_2552855209_1503420875.mp4'

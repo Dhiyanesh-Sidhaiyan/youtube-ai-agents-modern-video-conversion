@@ -2,62 +2,85 @@ from manim import *
 
 class Scene3(Scene):
     def construct(self):
-        title = Text("YouTube AI Agent Framework", font_size=40, color=BLUE).to_edge(UP, buff=0.4)
-        self.play(Write(title))
-        self.wait(0.5)
-
-        # Input (positioned above the agent pipeline)
-        input_box = Rectangle(width=2.8, height=0.9, color=WHITE, fill_opacity=0.1)
-        input_text = Text("Research Paper / Abstract", font_size=18)
-        input_text.move_to(input_box.get_center())
-        input_grp = VGroup(input_box, input_text).move_to(LEFT * 4.5 + UP * 1.8)
-
-        # Output (positioned above the agent pipeline, right side)
-        output_box = Rectangle(width=2.8, height=0.9, color=YELLOW, fill_opacity=0.2)
-        output_text = Text("Educational Video (MP4)", font_size=18, color=YELLOW_B)
-        output_text.move_to(output_box.get_center())
-        output_grp = VGroup(output_box, output_text).move_to(RIGHT * 4.5 + UP * 1.8)
-
-        self.play(FadeIn(input_grp))
+        # Title
+        title = Text("Real-World Failures: Lessons Learned", font_size=40, color=BLUE, weight=BOLD).to_edge(UP, buff=0.5)
+        self.play(Write(title), run_time=0.8)
         self.wait(0.3)
 
-        # Four agents in a row
-        agent_data = [
-            ("Research\n& Script", BLUE),
-            ("Animation\n(Manim)", GREEN),
-            ("TTS\nNarration", ORANGE),
-            ("Video\nAssembly", PURPLE),
-        ]
-        agents = VGroup()
-        for label, color in agent_data:
-            box = RoundedRectangle(corner_radius=0.2, width=2.2, height=1.3,
-                                   color=color, fill_opacity=0.25)
-            txt = Text(label, font_size=20, color=color)
-            txt.move_to(box.get_center())
-            agents.add(VGroup(box, txt))
+        # Example header with icon
+        example_icon = Triangle(color=YELLOW, fill_opacity=1).scale(0.2)
+        example_label = Text("EXAMPLE", font_size=24, color=YELLOW, weight=BOLD)
+        example_header = VGroup(example_icon, example_label).arrange(RIGHT, buff=0.2)
+        example_header.to_edge(LEFT, buff=0.8).shift(UP * 1.2)
+        self.play(
+            SpinInFromNothing(example_icon),
+            FadeIn(example_label, shift=RIGHT * 0.3),
+            run_time=0.6
+        )
 
-        agents.arrange(RIGHT, buff=0.25).move_to(ORIGIN + DOWN * 0.2)
-        self.play(FadeIn(agents, shift=UP * 0.3, lag_ratio=0.2))
-        self.wait(0.4)
+        # Code-style box with terminal look
+        code_box = RoundedRectangle(
+            corner_radius=0.15, width=11, height=3,
+            color=GREY_D, fill_opacity=0.95, stroke_width=2
+        ).move_to(ORIGIN + DOWN * 0.2)
 
-        # Arrows between agents (buff=0.15 to stop at box edge)
-        arrows = VGroup()
-        for i in range(len(agents) - 1):
-            arr = Arrow(
-                agents[i].get_right(), agents[i + 1].get_left(),
-                buff=0.15, color=GREY_B, stroke_width=3
-            )
-            arrows.add(arr)
-        self.play(LaggedStart(*[GrowArrow(a) for a in arrows], lag_ratio=0.2))
+        # Terminal header bar
+        header_bar = Rectangle(
+            width=11, height=0.4,
+            color=GREY_B, fill_opacity=1
+        ).next_to(code_box, UP, buff=0)
 
-        # Input → first agent (diagonal arrow, buff=0.2 to stop at edges)
-        arr_in = Arrow(input_grp.get_bottom(), agents[0].get_top(),
-                       buff=0.2, color=WHITE, stroke_width=3)
-        # Last agent → output (diagonal arrow, buff=0.2 to stop at edges)
-        arr_out = Arrow(agents[-1].get_top(), output_grp.get_bottom(),
-                        buff=0.2, color=YELLOW, stroke_width=3)
-        self.play(GrowArrow(arr_in), FadeIn(output_grp))
-        self.play(GrowArrow(arr_out))
-        self.wait(2.5)
+        # Terminal dots
+        dots = VGroup(
+            Dot(color=RED, radius=0.08),
+            Dot(color=YELLOW, radius=0.08),
+            Dot(color=GREEN, radius=0.08)
+        ).arrange(RIGHT, buff=0.12).move_to(header_bar.get_left() + RIGHT * 0.5)
 
-        self.play(FadeOut(VGroup(title, input_grp, output_grp, agents, arrows, arr_in, arr_out)))
+        terminal = VGroup(header_bar, dots, code_box)
+
+        self.play(
+            FadeIn(terminal, shift=UP * 0.3),
+            run_time=0.6
+        )
+
+        # Example text with typewriter effect simulation
+        example_text = Text(
+            "Chevrolet sale error, Air Canada chatbot mishap",
+            font_size=24, color=GREEN_A, font="Monospace"
+        ).move_to(code_box.get_center())
+
+        self.play(Write(example_text), run_time=1.2)
+        self.wait(0.5)
+
+        # Cursor blink effect
+        cursor = Line(UP * 0.2, DOWN * 0.2, color=WHITE, stroke_width=3)
+        cursor.next_to(example_text, RIGHT, buff=0.1)
+        self.play(FadeIn(cursor), run_time=0.1)
+        self.play(FadeOut(cursor), run_time=0.2)
+        self.play(FadeIn(cursor), run_time=0.1)
+        self.play(FadeOut(cursor), run_time=0.2)
+
+        # Result with success animation
+        result_box = RoundedRectangle(
+            corner_radius=0.1, width=8, height=0.8,
+            color=GREEN, fill_opacity=0.2, stroke_width=2
+        ).next_to(code_box, DOWN, buff=0.4)
+
+        checkmark = Text("✓", font_size=28, color=GREEN)
+        result_text = Text("Risks of poor LLM prompts", font_size=22, color=GREEN_B, weight=BOLD)
+        result_content = VGroup(checkmark, result_text).arrange(RIGHT, buff=0.2)
+        result_content.move_to(result_box.get_center())
+
+        self.play(
+            DrawBorderThenFill(result_box),
+            run_time=0.4
+        )
+        self.play(
+            GrowFromCenter(checkmark),
+            Write(result_text),
+            Flash(result_box, color=GREEN, line_length=0.2),
+            run_time=0.6
+        )
+        # Hold final frame for freeze (no fade out)
+        self.wait(3)
