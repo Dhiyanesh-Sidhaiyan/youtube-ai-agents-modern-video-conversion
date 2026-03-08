@@ -1,6 +1,6 @@
 # YouTube AI Agents - Educational Video Generator
 
-Transform academic abstracts and papers into animated educational videos using a multi-agent AI pipeline.
+Transform YouTube videos, academic abstracts, and papers into animated educational videos using a multi-agent AI pipeline.
 
 ## Demo
 
@@ -8,18 +8,19 @@ https://github.com/user-attachments/assets/final_video.mp4
 
 <video src="output/final_video.mp4" controls width="100%"></video>
 
-> Sample output generated from an academic abstract
+> Sample output generated from a YouTube transcript
 
 ## Overview
 
-This project uses a 4-agent architecture powered by CrewAI and local LLMs (via Ollama) to automatically generate educational videos from text content:
+This project uses a 5-agent architecture powered by local LLMs (via Ollama) to automatically generate educational videos from YouTube URLs or text content:
 
 | Agent | Role | Output |
 |-------|------|--------|
-| **Script Agent** | Converts abstract into structured script | `script.json` |
-| **Animation Agent** | Generates Manim animation code | Scene MP4s |
-| **TTS Agent** | Creates narration audio | WAV files |
-| **Video Agent** | Assembles final video | `final_video.mp4` |
+| **Transcript Agent** | Fetches YouTube transcripts, extracts key concepts | `transcript_data.json` |
+| **Script Agent** | Converts transcript/abstract into structured script | `script.json` |
+| **Animation Agent** | Generates Manim animations using templates | Scene MP4s |
+| **TTS Agent** | Creates narration audio (multi-language) | WAV files |
+| **Video Agent** | Assembles final video with subtitles | `final_video.mp4` |
 
 ## Prerequisites
 
@@ -50,7 +51,38 @@ source venv/bin/activate  # On Windows: venv\Scripts\activate
 pip install -r requirements.txt
 ```
 
-## Usage
+## Quick Start (YouTube URL)
+
+The easiest way to generate a video from a YouTube URL:
+
+```bash
+python framework.py "https://www.youtube.com/watch?v=VIDEO_ID"
+```
+
+### Framework Options
+
+```bash
+# Generate video in Hindi
+python framework.py "https://youtu.be/VIDEO_ID" --language hi
+
+# Custom output path
+python framework.py "https://youtube.com/watch?v=ID" --output my_video.mp4
+
+# From local transcript file
+python framework.py transcript.log --language en
+
+# Only generate transcript (no video)
+python framework.py "https://youtube.com/watch?v=ID" --transcript-only
+
+# Only generate script (transcript + script agents)
+python framework.py "https://youtube.com/watch?v=ID" --script-only
+```
+
+---
+
+## Legacy Usage (Abstract-based)
+
+For the original abstract-based pipeline:
 
 ```bash
 python pipeline.py [abstract_file] [language] [options]
@@ -95,37 +127,59 @@ python pipeline.py abstracts.txt en --skip-tts
 
 ```
 .
-├── pipeline.py              # Main orchestrator
+├── framework.py             # YouTube URL entry point (recommended)
+├── pipeline.py              # Legacy abstract-based orchestrator
+├── get_transcript.py        # Standalone transcript fetcher
 ├── agents/
-│   ├── script_agent.py      # Abstract → structured script
+│   ├── transcript_agent.py  # YouTube → preprocessed transcript
+│   ├── script_agent.py      # Transcript/abstract → structured script
+│   ├── scene_templates.py   # Parameterized Manim scene templates
 │   ├── animation_agent.py   # Script → Manim animations
-│   ├── prebuilt_scenes.py   # Reusable animation templates
+│   ├── prebuilt_scenes.py   # Legacy hardcoded animation templates
 │   ├── tts_agent.py         # Script → narration audio
 │   └── video_agent.py       # Assembles final video
 ├── output/
-│   ├── script.json          # Generated script
-│   ├── scenes/              # Manim scene files
+│   ├── transcript_data.json # Processed transcript with summary
+│   ├── script.json          # Generated script with scene_type
+│   ├── scenes/              # Manim scene files and MP4s
 │   ├── audio/               # Narration WAV files
-│   ├── videos/              # Individual scene videos
 │   └── final_video.mp4      # Final output
-├── abstracts.txt            # Sample input
+├── abstracts.txt            # Sample abstract input
+├── transcript.log           # Sample transcript input
 └── requirements.txt
 ```
 
 ## Output
 
 The pipeline generates:
-- `output/script.json` - Structured script with scenes and narration
-- `output/videos/` - Individual animated scene clips
-- `output/audio/` - Narration audio files
-- `output/final_video.mp4` - Complete assembled video
+- `output/transcript_data.json` - Processed transcript with summary and key concepts
+- `output/script.json` - Structured script with scenes, narration, and scene types
+- `output/scenes/` - Manim scene Python files and rendered MP4s
+- `output/audio/` - Narration audio files (WAV)
+- `output/final_video.mp4` - Complete assembled video with subtitles
+
+## Dynamic Scene Templates
+
+The framework uses parameterized Manim templates based on scene type:
+
+| Scene Type | Use Case | Visual Style |
+|------------|----------|--------------|
+| `intro` | Opening scene | Title + bullet points |
+| `concept` | Explain key ideas | Central box with details |
+| `comparison` | Side-by-side analysis | Left vs Right columns |
+| `process` | Step-by-step flow | Horizontal boxes with arrows |
+| `example` | Code/demo showcase | Code box with result |
+| `conclusion` | Summary/takeaways | Key points + final message |
+
+The LLM automatically selects appropriate scene types based on content.
 
 ## Dependencies
 
-- **CrewAI** - Multi-agent orchestration
-- **Manim** - Mathematical animations
-- **MoviePy** - Video editing and assembly
-- **Transformers** - TTS models
+- **Manim Community** - Mathematical animations
+- **MoviePy 2.x** - Video editing and assembly
+- **YouTube Transcript API** - Fetch YouTube transcripts
+- **Ollama** - Local LLM inference (phi4, llama3)
+- **Transformers** - TTS models (Indic Parler TTS, Meta MMS)
 - **Torch** - ML backend
 
 ## Citation

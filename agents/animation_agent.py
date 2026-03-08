@@ -147,8 +147,11 @@ def _find_rendered_mp4(class_name: str, search_root: str) -> str | None:
 def generate_scene(scene: dict, scenes_dir: str) -> str | None:
     """
     Generate and render a Manim scene.
-    First tries to use a pre-built topic-specific scene; then falls back
-    to the LLM Writer+Reviewer loop; then to a generic animated fallback.
+    Priority order:
+    1. Dynamic templates (if scene_type is present) - for transcript-based content
+    2. Pre-built topic-specific scenes (if scene_id in PREBUILT_SCENES) - legacy
+    3. LLM Writer+Reviewer loop
+    4. Generic animated fallback
     Returns path to rendered MP4 or None on failure.
     """
     scene_id = scene["scene_id"]
@@ -159,7 +162,31 @@ def generate_scene(scene: dict, scenes_dir: str) -> str | None:
 
     print(f"\n[Animation Agent] Scene {scene_id}: {title}")
 
-    # ── Priority 1: Use pre-built animated scene if available ───────────────
+    # ── Priority 1: Dynamic templates (for transcript-based scripts) ────────
+    scene_type = scene.get("scene_type")
+    if scene_type:
+        try:
+            from agents.scene_templates import generate_scene_code, SCENE_TEMPLATES
+            if scene_type in SCENE_TEMPLATES:
+                print(f"  Using dynamic template: {scene_type}")
+                code = generate_scene_code(scene)
+                if code:
+                    with open(scene_file, "w") as f:
+                        f.write(code)
+                    success, err = render_manim(
+                        scene_file, class_name, os.path.dirname(scenes_dir)
+                    )
+                    if success:
+                        mp4 = _find_rendered_mp4(class_name, os.path.dirname(scenes_dir))
+                        if mp4:
+                            print(f"  Dynamic template rendered: {mp4}")
+                            return mp4
+                    print(f"  Template render failed ({err[-150:]}). Trying fallbacks.")
+        except ImportError:
+            pass  # scene_templates not available, continue with fallbacks
+    # ────────────────────────────────────────────────────────────────────────
+
+    # ── Priority 2: Use pre-built animated scene if available (legacy) ──────
     from agents.prebuilt_scenes import PREBUILT_SCENES
     if scene_id in PREBUILT_SCENES:
         print(f"  Using pre-built animated scene.")
