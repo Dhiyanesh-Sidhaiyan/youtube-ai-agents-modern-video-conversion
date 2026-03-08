@@ -1,0 +1,13 @@
+# This file is used internally by FFMPEG.
+file 'file:/Users/project/playground/youtube_transcript/output/scenes/videos/tmpioe1n78x/480p15/partial_movie_files/Scene1/1584795214_2052178575_223132457.mp4'
+file 'file:/Users/project/playground/youtube_transcript/output/scenes/videos/tmpioe1n78x/480p15/partial_movie_files/Scene1/4072820271_3394500337_2805665002.mp4'
+file 'file:/Users/project/playground/youtube_transcript/output/scenes/videos/tmpioe1n78x/480p15/partial_movie_files/Scene1/4072820271_3138673119_1609021394.mp4'
+file 'file:/Users/project/playground/youtube_transcript/output/scenes/videos/tmpioe1n78x/480p15/partial_movie_files/Scene1/4072820271_3585970359_577269757.mp4'
+file 'file:/Users/project/playground/youtube_transcript/output/scenes/videos/tmpioe1n78x/480p15/partial_movie_files/Scene1/4072820271_1106225863_1743280930.mp4'
+file 'file:/Users/project/playground/youtube_transcript/output/scenes/videos/tmpioe1n78x/480p15/partial_movie_files/Scene1/4072820271_1433877407_2332463672.mp4'
+file 'file:/Users/project/playground/youtube_transcript/output/scenes/videos/tmpioe1n78x/480p15/partial_movie_files/Scene1/4072820271_3905106168_1942015388.mp4'
+file 'file:/Users/project/playground/youtube_transcript/output/scenes/videos/tmpioe1n78x/480p15/partial_movie_files/Scene1/4072820271_1945855558_2163126527.mp4'
+file 'file:/Users/project/playground/youtube_transcript/output/scenes/videos/tmpioe1n78x/480p15/partial_movie_files/Scene1/4072820271_4217992463_2981492218.mp4'
+file 'file:/Users/project/playground/youtube_transcript/output/scenes/videos/tmpioe1n78x/480p15/partial_movie_files/Scene1/4072820271_2741671028_3931061920.mp4'
+file 'file:/Users/project/playground/youtube_transcript/output/scenes/videos/tmpioe1n78x/480p15/partial_movie_files/Scene1/4072820271_2844360058_82605842.mp4'
+file 'file:/Users/project/playground/youtube_transcript/output/scenes/videos/tmpioe1n78x/480p15/partial_movie_files/Scene1/4072820271_3397111854_2217050310.mp4'

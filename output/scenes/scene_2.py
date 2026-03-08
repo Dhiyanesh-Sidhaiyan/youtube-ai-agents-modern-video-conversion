@@ -15,7 +15,7 @@ class Scene2(Scene):
             Text("• Limited reach", font_size=22),
         ).arrange(DOWN, aligned_edge=LEFT, buff=0.2)
         left_content = VGroup(left_label, left_items).arrange(DOWN, buff=0.3)
-        left_grp = VGroup(left_box, left_content).arrange(ORIGIN).move_to(LEFT * 3.2 + DOWN * 0.3)
+        left_grp = VGroup(left_box, left_content).move_to(LEFT * 2.8 + DOWN * 0.3)
         left_content.move_to(left_box.get_center())
 
         # Right: Video learning
@@ -27,7 +27,7 @@ class Scene2(Scene):
             Text("• Reaches millions", font_size=22),
         ).arrange(DOWN, aligned_edge=LEFT, buff=0.2)
         right_content = VGroup(right_label, right_items).arrange(DOWN, buff=0.3)
-        right_grp = VGroup(right_box, right_content).arrange(ORIGIN).move_to(RIGHT * 3.2 + DOWN * 0.3)
+        right_grp = VGroup(right_box, right_content).move_to(RIGHT * 2.8 + DOWN * 0.3)
         right_content.move_to(right_box.get_center())
 
         vs = Text("VS", font_size=36, color=YELLOW).move_to(ORIGIN + DOWN * 0.3)

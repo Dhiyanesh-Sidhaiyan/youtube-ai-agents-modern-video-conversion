@@ -10,13 +10,13 @@ class Scene3(Scene):
         input_box = Rectangle(width=3, height=1, color=WHITE, fill_opacity=0.1)
         input_text = Text("Research Paper\n/ Abstract", font_size=22)
         input_text.move_to(input_box.get_center())
-        input_grp = VGroup(input_box, input_text).move_to(LEFT * 5 + UP * 0)
+        input_grp = VGroup(input_box, input_text).move_to(LEFT * 4 + UP * 0)
 
         # Output
         output_box = Rectangle(width=3, height=1, color=YELLOW, fill_opacity=0.2)
         output_text = Text("Educational\nVideo (MP4)", font_size=22, color=YELLOW_B)
         output_text.move_to(output_box.get_center())
-        output_grp = VGroup(output_box, output_text).move_to(RIGHT * 5 + UP * 0)
+        output_grp = VGroup(output_box, output_text).move_to(RIGHT * 4 + UP * 0)
 
         self.play(FadeIn(input_grp))
         self.wait(0.3)

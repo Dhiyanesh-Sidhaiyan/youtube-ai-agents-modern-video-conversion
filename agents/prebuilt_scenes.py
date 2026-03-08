@@ -72,7 +72,7 @@ class Scene2(Scene):
             Text("• Limited reach", font_size=22),
         ).arrange(DOWN, aligned_edge=LEFT, buff=0.2)
         left_content = VGroup(left_label, left_items).arrange(DOWN, buff=0.3)
-        left_grp = VGroup(left_box, left_content).arrange(ORIGIN).move_to(LEFT * 3.2 + DOWN * 0.3)
+        left_grp = VGroup(left_box, left_content).move_to(LEFT * 2.8 + DOWN * 0.3)
         left_content.move_to(left_box.get_center())
 
         # Right: Video learning
@@ -84,7 +84,7 @@ class Scene2(Scene):
             Text("• Reaches millions", font_size=22),
         ).arrange(DOWN, aligned_edge=LEFT, buff=0.2)
         right_content = VGroup(right_label, right_items).arrange(DOWN, buff=0.3)
-        right_grp = VGroup(right_box, right_content).arrange(ORIGIN).move_to(RIGHT * 3.2 + DOWN * 0.3)
+        right_grp = VGroup(right_box, right_content).move_to(RIGHT * 2.8 + DOWN * 0.3)
         right_content.move_to(right_box.get_center())
 
         vs = Text("VS", font_size=36, color=YELLOW).move_to(ORIGIN + DOWN * 0.3)
@@ -118,13 +118,13 @@ class Scene3(Scene):
         input_box = Rectangle(width=3, height=1, color=WHITE, fill_opacity=0.1)
         input_text = Text("Research Paper\\n/ Abstract", font_size=22)
         input_text.move_to(input_box.get_center())
-        input_grp = VGroup(input_box, input_text).move_to(LEFT * 5 + UP * 0)
+        input_grp = VGroup(input_box, input_text).move_to(LEFT * 4 + UP * 0)
 
         # Output
         output_box = Rectangle(width=3, height=1, color=YELLOW, fill_opacity=0.2)
         output_text = Text("Educational\\nVideo (MP4)", font_size=22, color=YELLOW_B)
         output_text.move_to(output_box.get_center())
-        output_grp = VGroup(output_box, output_text).move_to(RIGHT * 5 + UP * 0)
+        output_grp = VGroup(output_box, output_text).move_to(RIGHT * 4 + UP * 0)
 
         self.play(FadeIn(input_grp))
         self.wait(0.3)
@@ -187,8 +187,12 @@ class Scene4(Scene):
         ]
 
         boxes = VGroup()
-        positions = [UL * 2.8 + LEFT * 0.5, UR * 2.8 + RIGHT * 0.5,
-                     DL * 2.8 + LEFT * 0.5, DR * 2.8 + RIGHT * 0.5]
+        positions = [
+            LEFT * 3.3 + UP * 1.5,    # top-left (below title)
+            RIGHT * 3.3 + UP * 1.5,   # top-right
+            LEFT * 3.3 + DOWN * 1.5,  # bottom-left
+            RIGHT * 3.3 + DOWN * 1.5  # bottom-right
+        ]
 
         for i, (name, desc, color, _) in enumerate(components):
             box = RoundedRectangle(corner_radius=0.25, width=4.5, height=1.8,
@@ -234,14 +238,14 @@ class Scene5(Scene):
             ("Input: Python Programming Abstract", WHITE),
             ("Agent 1 → Script: 6 structured scenes", BLUE_B),
             ("Agent 2 → Manim animations per scene", GREEN_B),
-            ("Agent 3 → Hindi/English narration WAVs", ORANGE_B),
+            ("Agent 3 → Hindi/English narration WAVs", ORANGE),
             ("Agent 4 → Final MP4 video assembled", YELLOW_B),
         ]
 
         step_grps = VGroup()
         for i, (text, color) in enumerate(steps):
             circle = Circle(radius=0.28, color=color, fill_opacity=0.8)
-            num = Text(str(i), font_size=20, color=BLACK, weight=BOLD)
+            num = Text(str(i + 1), font_size=20, color=BLACK, weight=BOLD)
             num.move_to(circle.get_center())
             label = Text(text, font_size=22, color=color)
             row = VGroup(VGroup(circle, num), label).arrange(RIGHT, buff=0.35)

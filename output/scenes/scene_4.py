@@ -14,8 +14,12 @@ class Scene4(Scene):
         ]
 
         boxes = VGroup()
-        positions = [UL * 2.8 + LEFT * 0.5, UR * 2.8 + RIGHT * 0.5,
-                     DL * 2.8 + LEFT * 0.5, DR * 2.8 + RIGHT * 0.5]
+        positions = [
+            LEFT * 3.3 + UP * 1.5,    # top-left (below title)
+            RIGHT * 3.3 + UP * 1.5,   # top-right
+            LEFT * 3.3 + DOWN * 1.5,  # bottom-left
+            RIGHT * 3.3 + DOWN * 1.5  # bottom-right
+        ]
 
         for i, (name, desc, color, _) in enumerate(components):
             box = RoundedRectangle(corner_radius=0.25, width=4.5, height=1.8,
