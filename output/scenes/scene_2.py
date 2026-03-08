@@ -2,8 +2,12 @@ from manim import *
 
 class Scene2(Scene):
     def construct(self):
+        # Dark blue gradient background for better visibility
+        bg = Rectangle(width=16, height=10, fill_color="#16213e", fill_opacity=1, stroke_width=0)
+        self.add(bg)
+
         # Title with drawing effect
-        title = Text("Understanding Prompts as Executable Logic", font_size=40, color=BLUE, weight=BOLD).to_edge(UP, buff=0.5)
+        title = Text("Early Programming Languages and Tools", font_size=40, color=BLUE, weight=BOLD).to_edge(UP, buff=0.5)
         self.play(DrawBorderThenFill(title), run_time=1.0)
         self.wait(0.3)
 
@@ -16,7 +20,7 @@ class Scene2(Scene):
         # Add subtle glow
         glow = concept_box.copy().set_stroke(GREEN, width=8, opacity=0.3)
 
-        concept_text = Text("Prompts as Executable Logic", font_size=34, color=GREEN, weight=BOLD)
+        concept_text = Text("Evolution of Programming Languages", font_size=34, color=GREEN, weight=BOLD)
         concept_text.move_to(concept_box.get_center())
 
         self.play(
@@ -33,9 +37,9 @@ class Scene2(Scene):
 
         # Supporting details with icons
         details = VGroup(
-            Text("- Prompts guide LLMs with instructions.", font_size=22, color=WHITE),
-            Text("- Outputs vary due to stochastic nature.", font_size=22, color=WHITE),
-            Text("- Unlike deterministic software, prompts produce div", font_size=22, color=WHITE),
+            Text("- Assembly language required detailed hardware manag", font_size=22, color=WHITE),
+            Text("- COBOL and Pascal simplified coding tasks significa", font_size=22, color=WHITE),
+            Text("- Early programming involved low-level languages lik", font_size=22, color=WHITE),
         ).arrange(DOWN, aligned_edge=LEFT, buff=0.25).next_to(concept_box, DOWN, buff=0.6)
 
         # Animated entry with stagger

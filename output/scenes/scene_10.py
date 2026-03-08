@@ -2,8 +2,12 @@ from manim import *
 
 class Scene10(Scene):
     def construct(self):
+        # Dark gradient background for better visibility
+        bg = Rectangle(width=16, height=10, fill_color="#16213e", fill_opacity=1, stroke_width=0)
+        self.add(bg)
+
         # Title with celebratory entry
-        title = Text("The Future of LLMs in Enterprises", font_size=44, color=BLUE, weight=BOLD).to_edge(UP, buff=0.5)
+        title = Text("Conclusion: Embracing Change in Software Deve", font_size=44, color=BLUE, weight=BOLD).to_edge(UP, buff=0.5)
         self.play(
             GrowFromCenter(title),
             Flash(title, color=BLUE, line_length=0.4, num_lines=12),
@@ -25,10 +29,10 @@ class Scene10(Scene):
 
         # Key takeaways with checkmarks
         takeaways = VGroup(
-            Text("1. LLMs provide powerful capabilities for enterp", font_size=26, color=WHITE),
-            Text("2. Complexities arise with integrating LLMs into", font_size=26, color=WHITE),
-            Text("3. Robust systems are essential for future stabi", font_size=26, color=WHITE),
-            Text("4. Ensuring efficacy is key in new paradigms.", font_size=26, color=WHITE),
+            Text("1. Software development landscape is constantly ", font_size=26, color=WHITE),
+            Text("2. Embracing change enhances developer productiv", font_size=26, color=WHITE),
+            Text("3. Continuous learning is crucial for leveraging", font_size=26, color=WHITE),
+            Text("4. Developers maintain essential roles by integr", font_size=26, color=WHITE),
         ).arrange(DOWN, aligned_edge=LEFT, buff=0.35).next_to(header_line, DOWN, buff=0.5)
 
         # Add checkmark icons
@@ -50,7 +54,7 @@ class Scene10(Scene):
         ).to_edge(DOWN, buff=0.6)
 
         finale = Text(
-            "Embrace innovation, build resilient and effective ",
+            "Embrace change to thrive in software development.",
             font_size=30, color=GOLD, weight=BOLD
         ).move_to(finale_box.get_center())
 

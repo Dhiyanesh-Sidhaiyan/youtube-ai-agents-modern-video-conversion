@@ -33,11 +33,16 @@ self.wait(0.5)
 """,
 
     "colors": """
-# FIX: Improve color contrast
-# Use high-contrast color pairs:
-title = Text("Title", color=WHITE)  # White on dark background
-# Or with background:
-text = Text("Content", color=BLUE_D).set_background_color(WHITE, opacity=0.8)
+# FIX: Improve color contrast and add background
+# Add a dark blue background rectangle at the start of construct():
+bg = Rectangle(width=16, height=10, fill_color="#1a1a2e", fill_opacity=1, stroke_width=0)
+self.add(bg)  # Add background first, before any other elements
+
+# Use high-contrast colors on dark background:
+title = Text("Title", color=WHITE, weight=BOLD)  # White on dark
+text = Text("Content", color=BLUE_A)  # Light blue for visibility
+# Use bright accent colors:
+highlight = Text("Important", color=YELLOW)
 """,
 
     "content_density": """
@@ -95,6 +100,10 @@ Rewrite the Manim code with these fixes applied. Key rules:
 5. Use appropriate font sizes (title: 40-48, body: 24-32)
 6. Add self.wait() calls between animations
 7. Scale down large elements with .scale(0.85) if needed
+8. IMPORTANT: For dark/contrast issues, ADD A BACKGROUND at the start of construct():
+   bg = Rectangle(width=16, height=10, fill_color="#1a1a2e", fill_opacity=1, stroke_width=0)
+   self.add(bg)
+9. Use WHITE or bright colors (YELLOW, BLUE_A, GREEN_A) for text on dark backgrounds
 
 Return ONLY the fixed Python code, no explanation."""
 
@@ -220,8 +229,8 @@ def fix_scene(
     # First try manual fixes
     fixed_code = apply_manual_fixes(original_code, fixes)
 
-    # If significant issues, use LLM
-    critical_fixes = [f for f in fixes if f.get("type") in ["positioning", "animation_content"]]
+    # If significant issues, use LLM (including colors/contrast issues)
+    critical_fixes = [f for f in fixes if f.get("type") in ["positioning", "animation_content", "colors"]]
 
     if critical_fixes:
         prompt = FIXER_PROMPT.format(

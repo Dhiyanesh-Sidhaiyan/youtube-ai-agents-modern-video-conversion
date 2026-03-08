@@ -20,6 +20,10 @@ SCENE_TEMPLATES = {
 
 class Scene{scene_id}(Scene):
     def construct(self):
+        # Dark blue gradient background for better visibility
+        bg = Rectangle(width=16, height=10, fill_color="#1a1a2e", fill_opacity=1, stroke_width=0)
+        self.add(bg)
+
         # Animated title with underline
         title = Text("{title}", font_size=44, color=BLUE, weight=BOLD).to_edge(UP, buff=0.5)
         underline = Line(
@@ -62,6 +66,10 @@ class Scene{scene_id}(Scene):
 
 class Scene{scene_id}(Scene):
     def construct(self):
+        # Dark blue gradient background for better visibility
+        bg = Rectangle(width=16, height=10, fill_color="#16213e", fill_opacity=1, stroke_width=0)
+        self.add(bg)
+
         # Title with drawing effect
         title = Text("{title}", font_size=40, color=BLUE, weight=BOLD).to_edge(UP, buff=0.5)
         self.play(DrawBorderThenFill(title), run_time=1.0)
@@ -115,6 +123,10 @@ class Scene{scene_id}(Scene):
 
 class Scene{scene_id}(Scene):
     def construct(self):
+        # Dark background for better visibility
+        bg = Rectangle(width=16, height=10, fill_color="#0f0f23", fill_opacity=1, stroke_width=0)
+        self.add(bg)
+
         # Title with emphasis
         title = Text("{title}", font_size=40, color=BLUE, weight=BOLD).to_edge(UP, buff=0.5)
         self.play(Write(title), run_time=0.8)
@@ -182,6 +194,10 @@ class Scene{scene_id}(Scene):
 
 class Scene{scene_id}(Scene):
     def construct(self):
+        # Dark background for better visibility
+        bg = Rectangle(width=16, height=10, fill_color="#1a1a2e", fill_opacity=1, stroke_width=0)
+        self.add(bg)
+
         # Title with animation
         title = Text("{title}", font_size=40, color=BLUE, weight=BOLD).to_edge(UP, buff=0.5)
         self.play(DrawBorderThenFill(title), run_time=0.8)
@@ -264,6 +280,10 @@ class Scene{scene_id}(Scene):
 
 class Scene{scene_id}(Scene):
     def construct(self):
+        # Dark background for better visibility
+        bg = Rectangle(width=16, height=10, fill_color="#0d1117", fill_opacity=1, stroke_width=0)
+        self.add(bg)
+
         # Title
         title = Text("{title}", font_size=40, color=BLUE, weight=BOLD).to_edge(UP, buff=0.5)
         self.play(Write(title), run_time=0.8)
@@ -352,6 +372,10 @@ class Scene{scene_id}(Scene):
 
 class Scene{scene_id}(Scene):
     def construct(self):
+        # Dark gradient background for better visibility
+        bg = Rectangle(width=16, height=10, fill_color="#16213e", fill_opacity=1, stroke_width=0)
+        self.add(bg)
+
         # Title with celebratory entry
         title = Text("{title}", font_size=44, color=BLUE, weight=BOLD).to_edge(UP, buff=0.5)
         self.play(

@@ -159,80 +159,68 @@ def run_pipeline(
     )
 
     # ────────────────────────────────────────────────────────────────────────
-    # Step 6: Quality Evaluation & Visual Analysis
+    # Step 6: Final Quality Report
     # ────────────────────────────────────────────────────────────────────────
-    print_step(6, 6, "Quality Evaluation & Visual Analysis")
+    print_step(6, 6, "Final Quality Report")
 
     from agents.eval_agent import evaluate_pipeline
     from agents.visual_analyzer import analyze_all_scenes
-    from agents.animation_fixer import fix_all_scenes
 
     eval_path = os.path.join(output_dir, "evaluation.json")
     visual_path = os.path.join(output_dir, "visual_analysis.json")
 
-    # Initial evaluation
+    # Generate final evaluation report
     evaluation = evaluate_pipeline(script_json, scene_results, audio_results, eval_path)
 
-    # Visual frame-by-frame analysis
+    # Visual frame-by-frame analysis for detailed reporting
     visual_analysis = analyze_all_scenes(scene_results, visual_path)
+    visual_avg = visual_analysis.get("summary", {}).get("avg_quality", 0)
 
-    # Improvement loop - trigger on EITHER overall score OR visual quality
-    iteration = 1
-    visual_avg = visual_analysis.get("summary", {}).get("avg_quality", 100)
-    needs_improvement = (
-        evaluation.overall_score < quality_threshold or
-        visual_avg < quality_threshold
-    )
+    # Per-scene quality was already ensured during animation generation
+    # Check if any scenes need fallback improvement (for legacy/non-self-refine mode)
+    scenes_below_threshold = [
+        r for r in scene_results
+        if r.get("quality_score", 100) < quality_threshold
+        and not r.get("passed_threshold", True)
+    ]
 
-    while iteration < max_iterations and needs_improvement:
-        needs_fix = visual_analysis.get("summary", {}).get("needs_improvement", [])
+    iteration = 1  # Track for summary output
 
-        if not needs_fix:
-            # Check eval scores instead
-            needs_fix = [
-                e.scene_id for e in evaluation.scene_evaluations
-                if e.overall_score < quality_threshold
-            ]
+    if scenes_below_threshold and max_iterations > 1:
+        from agents.animation_fixer import fix_all_scenes
 
-        # Also check individual visual scores
-        if not needs_fix:
-            for scene_vis in visual_analysis.get("scenes", []):
-                if scene_vis.get("quality_score", 100) < quality_threshold:
-                    needs_fix.append(scene_vis["scene_id"])
+        print(f"\n  {len(scenes_below_threshold)} scenes below threshold, applying batch fixes...")
 
-        if not needs_fix:
-            break
+        for iteration in range(2, max_iterations + 1):
+            # Apply fixes
+            scene_results = fix_all_scenes(scene_results, visual_analysis, scenes_dir)
 
-        print(f"\n  Improvement iteration {iteration + 1}/{max_iterations}")
-        print(f"  Fixing {len(needs_fix)} scenes with visual/quality issues...")
+            # Re-assemble video
+            final_video = assemble_video(
+                script_json,
+                scene_results,
+                audio_results,
+                output_path,
+            )
 
-        # Apply visual fixes using animation fixer
-        scene_results = fix_all_scenes(scene_results, visual_analysis, scenes_dir)
+            # Re-evaluate
+            evaluation = evaluate_pipeline(script_json, scene_results, audio_results, eval_path)
+            visual_analysis = analyze_all_scenes(scene_results, visual_path)
 
-        # Re-assemble video
-        print(f"\n  Re-assembling video...")
-        final_video = assemble_video(
-            script_json,
-            scene_results,
-            audio_results,
-            output_path,
-        )
+            print(f"    Iteration {iteration}: Score {evaluation.overall_score:.1f}/100")
 
-        # Re-evaluate
-        evaluation = evaluate_pipeline(script_json, scene_results, audio_results, eval_path)
-        visual_analysis = analyze_all_scenes(scene_results, visual_path)
-        iteration += 1
+            if evaluation.overall_score >= quality_threshold:
+                break
 
-        # Recalculate improvement condition
-        visual_avg = visual_analysis.get("summary", {}).get("avg_quality", 100)
-        needs_improvement = (
-            evaluation.overall_score < quality_threshold or
-            visual_avg < quality_threshold
-        )
+        print(f"\n  Batch improvement complete after {iteration} iterations")
 
-    if iteration > 1:
-        print(f"\n  Improvement complete after {iteration} iterations")
-        print(f"  Final score: {evaluation.overall_score:.1f}/100")
+    # Report per-scene quality (from self-refine if enabled)
+    passed_count = sum(1 for r in scene_results if r.get("passed_threshold", True))
+    total_count = len(scene_results)
+
+    print(f"\n  Per-scene quality: {passed_count}/{total_count} passed threshold")
+    print(f"  Visual quality avg: {visual_avg:.1f}/100")
+    print(f"  Overall score: {evaluation.overall_score:.1f}/100")
 
     # ────────────────────────────────────────────────────────────────────────
     # Summary

@@ -2,14 +2,21 @@ from manim import *
 
 class Scene9(Scene):
     def construct(self):
+        # Dark background for better visibility
+        bg = Rectangle(width=16, height=10, fill_color="#1a1a2e", fill_opacity=1, stroke_width=0)
+        self.add(bg)
+
         # Title with animation
-        title = Text("Instrumenting Prompts for Success", font_size=40, color=BLUE, weight=BOLD).to_edge(UP, buff=0.5)
+        title = Text("Developing Robust AI Infrastructure", font_size=40, color=WHITE, weight=BOLD).to_edge(UP, buff=0.5)
         self.play(DrawBorderThenFill(title), run_time=0.8)
         self.wait(0.3)
 
         # Process steps with enhanced styling
-        step_data = [['Define Goals', 'Identify the objectives for us'], ['Design Prompts', 'Create clear and concise promp'], ['Test Prompts', 'Conduct thorough testing of pr'], ['Iterate Design', 'Refine prompts based on feedba'], ['Deploy Prompts', 'Implement the finalized prompt']]
-        colors = [BLUE_D, GREEN_D, ORANGE, PURPLE_B, TEAL_D]
+        step_data = [['Development', 'Design and build AI models wit'], 
+                     ['Testing', 'Conduct rigorous testing to en'], 
+                     ['Deployment', 'Deploy the AI models into prod'], 
+                     ['Monitoring', 'Continuously monitor deployed ']]
+        colors = [BLUE_A, GREEN_A, YELLOW, PURPLE_B]
 
         steps = VGroup()
         step_numbers = VGroup()

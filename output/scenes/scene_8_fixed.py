@@ -2,8 +2,12 @@ from manim import *
 
 class Scene8(Scene):
     def construct(self):
-        # Title with emphasis
-        title = Text("Deterministic vs. Stochastic Outputs", font_size=40, color=BLUE, weight=BOLD).to_edge(UP, buff=0.5)
+        # Dark blue background for better visibility
+        bg = Rectangle(width=16, height=10, fill_color="#1a1a2e", fill_opacity=1, stroke_width=0)
+        self.add(bg)
+
+        # Title with emphasis and high contrast
+        title = Text("Historical Evolution of Computing Paradigms", font_size=40, color=WHITE, weight=BOLD).to_edge(UP, buff=0.5)
         self.play(Write(title), run_time=0.8)
         self.wait(0.3)
 
@@ -12,12 +16,11 @@ class Scene8(Scene):
             corner_radius=0.2, width=5, height=3.5,
             color=RED_C, fill_opacity=0.1, stroke_width=3
         )
-        left_header = Text("Deterministic Outputs", font_size=28, color=RED_C, weight=BOLD)
+        left_header = Text("Past Computing Paradigms", font_size=28, color=WHITE, weight=BOLD)
         left_underline = Line(LEFT * 1.5, RIGHT * 1.5, color=RED_C, stroke_width=2)
         left_items = VGroup(
-            Text("* Calculator", font_size=20, color=WHITE),
-            Text("* 1+1=2", font_size=20, color=WHITE),
-            Text("* Consistent Results", font_size=20, color=WHITE),
+            Text("* Punch Cards", font_size=20, color=WHITE),
+            Text("* Mainframes", font_size=20, color=WHITE),
         ).arrange(DOWN, aligned_edge=LEFT, buff=0.2)
 
         left_content = VGroup(left_header, left_underline, left_items).arrange(DOWN, buff=0.2)
@@ -29,12 +32,11 @@ class Scene8(Scene):
             corner_radius=0.2, width=5, height=3.5,
             color=GREEN_C, fill_opacity=0.1, stroke_width=3
         )
-        right_header = Text("Stochastic Outputs", font_size=28, color=GREEN_C, weight=BOLD)
+        right_header = Text("Modern and Future Computing", font_size=28, color=WHITE, weight=BOLD)
         right_underline = Line(LEFT * 1.5, RIGHT * 1.5, color=GREEN_C, stroke_width=2)
         right_items = VGroup(
-            Text("* LLM (Large Language Model)", font_size=20, color=WHITE),
-            Text("* Varied Responses", font_size=20, color=WHITE),
-            Text("* Inconsistent Results", font_size=20, color=WHITE),
+            Text("* Personal Computers", font_size=20, color=WHITE),
+            Text("* AI/LLMs", font_size=20, color=WHITE),
         ).arrange(DOWN, aligned_edge=LEFT, buff=0.2)
 
         right_content = VGroup(right_header, right_underline, right_items).arrange(DOWN, buff=0.2)
@@ -51,10 +53,12 @@ class Scene8(Scene):
             FadeIn(left_grp, shift=RIGHT * 2),
             run_time=0.7
         )
+        self.wait(0.3)
         self.play(
             SpinInFromNothing(vs),
             run_time=0.5
         )
+        self.wait(0.3)
         self.play(
             FadeIn(right_grp, shift=LEFT * 2),
             run_time=0.7
