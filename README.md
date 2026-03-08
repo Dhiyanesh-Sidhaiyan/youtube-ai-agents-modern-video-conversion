@@ -120,6 +120,25 @@ The pipeline generates:
 - **Transformers** - TTS models
 - **Torch** - ML backend
 
+## Citation
+
+If you use this project in your research or work, please cite it:
+
+### BibTeX
+
+```bibtex
+@software{sidhaiyan2026youtube_ai_agents,
+  author = {Sidhaiyan, Dhiyanesh},
+  title = {YouTube AI Agents: Educational Video Generator},
+  year = {2026},
+  url = {https://github.com/Dhiyanesh-Sidhaiyan/youtube-ai-agents-modern-video-conversion}
+}
+```
+
+### APA
+
+Sidhaiyan, D. (2026). *YouTube AI Agents: Educational Video Generator* [Computer software]. https://github.com/Dhiyanesh-Sidhaiyan/youtube-ai-agents-modern-video-conversion
+
 ## License
 
 MIT
