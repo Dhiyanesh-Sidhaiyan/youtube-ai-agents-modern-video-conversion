@@ -2,6 +2,14 @@
 
 Transform academic abstracts and papers into animated educational videos using a multi-agent AI pipeline.
 
+## Demo
+
+https://github.com/user-attachments/assets/final_video.mp4
+
+<video src="output/final_video.mp4" controls width="100%"></video>
+
+> Sample output generated from an academic abstract
+
 ## Overview
 
 This project uses a 4-agent architecture powered by CrewAI and local LLMs (via Ollama) to automatically generate educational videos from text content:
