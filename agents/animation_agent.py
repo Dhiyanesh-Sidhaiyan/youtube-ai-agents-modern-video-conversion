@@ -179,15 +179,20 @@ def generate_scene(
 
     print(f"\n[Animation Agent] Scene {scene_id}: {title}")
 
-    # ── Priority 1: Dynamic templates (for transcript-based scripts) ────────
     scene_type = scene.get("scene_type")
+
+    # ── Priority 1: TEMPLATES FIRST (guaranteed safe layout) ────────────────
+    # Templates have pre-validated positioning that ALWAYS works
     if scene_type:
         try:
             from agents.scene_templates import generate_scene_code, SCENE_TEMPLATES
+            from agents.scene_wrapper import process_manim_code
             if scene_type in SCENE_TEMPLATES:
-                print(f"  Using dynamic template: {scene_type}")
+                print(f"  Using SAFE template: {scene_type}")
                 code = generate_scene_code(scene)
                 if code:
+                    # Apply safety wrapper even to templates for extra protection
+                    code = process_manim_code(code)
                     with open(scene_file, "w") as f:
                         f.write(code)
                     success, err = render_manim(
@@ -196,11 +201,23 @@ def generate_scene(
                     if success:
                         mp4 = _find_rendered_mp4(class_name, os.path.dirname(scenes_dir))
                         if mp4:
-                            print(f"  Dynamic template rendered: {mp4}")
+                            print(f"  Template rendered: {mp4}")
                             return mp4
-                    print(f"  Template render failed ({err[-150:]}). Trying fallbacks.")
-        except ImportError:
-            pass  # scene_templates not available, continue with fallbacks
+                    print(f"  Template render failed ({err[-150:]}). Trying dynamic.")
+        except ImportError as e:
+            print(f"  Templates not available ({e}). Trying dynamic generator.")
+
+    # ── Priority 2: Dynamic LLM generation (with aggressive safety wrapper) ──
+    if scene_type:
+        try:
+            from agents.dynamic_scene_generator import generate_dynamic_scene
+            print(f"  Using dynamic LLM generator: {scene_type}")
+            mp4 = generate_dynamic_scene(scene, scenes_dir, feedback=feedback)
+            if mp4:
+                return mp4
+            print(f"  Dynamic generator failed. Trying other fallbacks.")
+        except ImportError as e:
+            print(f"  Dynamic generator not available ({e}).")
     # ────────────────────────────────────────────────────────────────────────
 
     # ── Priority 2: Use pre-built animated scene if available (legacy) ──────

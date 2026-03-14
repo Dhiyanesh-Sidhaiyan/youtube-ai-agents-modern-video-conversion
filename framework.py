@@ -25,6 +25,7 @@ Examples:
 import argparse
 import json
 import os
+import shutil
 import sys
 import time
 from datetime import datetime
@@ -54,6 +55,40 @@ def print_step(step_num: int, total: int, title: str):
     print(f"{'─' * 70}")
 
 
+def cleanup_output(output_dir: str):
+    """Remove stale output files from previous runs to prevent contamination."""
+    print(f"  [DEBUG] cleanup_output called with: {output_dir}")
+    print(f"  [DEBUG] Absolute path: {os.path.abspath(output_dir)}")
+
+    # Clean ALL generated content directories
+    dirs_to_clean = ["scenes", "videos", "audio", "texts", "images", "test", "debug_frames"]
+    files_to_clean = [
+        "script.json", "transcript_data.json", "scene_results.json",
+        "audio_results.json", "evaluation.json", "visual_analysis.json"
+    ]
+
+    cleaned = False
+    for dirname in dirs_to_clean:
+        path = os.path.join(output_dir, dirname)
+        print(f"  [DEBUG] Checking dir: {path} exists={os.path.exists(path)}")
+        if os.path.exists(path):
+            print(f"  Cleaning {path}/")
+            shutil.rmtree(path)
+            cleaned = True
+
+    for filename in files_to_clean:
+        path = os.path.join(output_dir, filename)
+        if os.path.exists(path):
+            print(f"  Removing {filename}")
+            os.remove(path)
+            cleaned = True
+
+    if cleaned:
+        print("  Old output files removed.")
+    else:
+        print("  No stale files to clean.")
+
+
 def run_pipeline(
     input_source: str,
     language: str = "en",
@@ -74,7 +109,13 @@ def run_pipeline(
     """
     start_time = time.time()
     output_dir = os.path.dirname(output_path) or "output"
+    print(f"\n  [DEBUG] output_path={output_path}")
+    print(f"  [DEBUG] output_dir={output_dir}")
     os.makedirs(output_dir, exist_ok=True)
+
+    # Clean stale output from previous runs
+    print("\n  Cleaning previous output...")
+    cleanup_output(output_dir)
 
     # Define intermediate file paths
     transcript_json = os.path.join(output_dir, "transcript_data.json")

@@ -26,6 +26,7 @@ Prerequisites:
 import argparse
 import json
 import os
+import shutil
 import sys
 import time
 
@@ -53,6 +54,43 @@ def banner(text: str):
     print("\n" + "═" * width)
     print(f"  {text}")
     print("═" * width)
+
+
+def cleanup_output(skip_script: bool, skip_animation: bool, skip_tts: bool):
+    """Remove stale output files from previous runs to prevent contamination."""
+    cleaned = False
+
+    if not skip_animation:
+        # Clean scene files, videos, and Manim caches
+        for dirname in ["scenes", "videos", "texts", "images", "test", "debug_frames"]:
+            path = os.path.join(OUTPUT_DIR, dirname)
+            if os.path.exists(path):
+                print(f"  Cleaning {path}/")
+                shutil.rmtree(path)
+                cleaned = True
+        # Remove cached scene results
+        if os.path.exists(SCENE_RESULTS_PATH):
+            os.remove(SCENE_RESULTS_PATH)
+            cleaned = True
+
+    if not skip_tts:
+        # Clean audio files
+        if os.path.exists(AUDIO_DIR):
+            print(f"  Cleaning {AUDIO_DIR}/")
+            shutil.rmtree(AUDIO_DIR)
+            cleaned = True
+        if os.path.exists(AUDIO_RESULTS_PATH):
+            os.remove(AUDIO_RESULTS_PATH)
+            cleaned = True
+
+    if not skip_script:
+        # Clean script
+        if os.path.exists(SCRIPT_PATH):
+            os.remove(SCRIPT_PATH)
+            cleaned = True
+
+    if not cleaned:
+        print("  Nothing to clean (using --skip flags)")
 
 
 def parse_args():
@@ -92,8 +130,6 @@ def run_pipeline(abstract_path: str, language: str,
                  skip_script: bool, skip_animation: bool, skip_tts: bool):
     start_time = time.time()
     os.makedirs(OUTPUT_DIR, exist_ok=True)
-    os.makedirs(SCENES_DIR, exist_ok=True)
-    os.makedirs(AUDIO_DIR, exist_ok=True)
 
     # ── Pre-flight checks ────────────────────────────────────────────────────
     banner("Pre-flight Checks")
@@ -104,6 +140,14 @@ def run_pipeline(abstract_path: str, language: str,
     print(f"  Language: {language}")
     if not skip_animation:
         check_ollama()
+
+    # ── Cleanup stale output ─────────────────────────────────────────────────
+    banner("Cleaning Output")
+    cleanup_output(skip_script, skip_animation, skip_tts)
+
+    # Create output directories after cleanup
+    os.makedirs(SCENES_DIR, exist_ok=True)
+    os.makedirs(AUDIO_DIR, exist_ok=True)
 
     # ── Agent 1: Script ──────────────────────────────────────────────────────
     banner("Agent 1: Research & Script")
