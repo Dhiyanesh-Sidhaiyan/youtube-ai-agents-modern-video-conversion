@@ -60,3 +60,5 @@ ENV/
 # Windows
 Thumbs.db
 Desktop.ini
+
+/paper
