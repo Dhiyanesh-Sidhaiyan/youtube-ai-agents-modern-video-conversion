@@ -29,6 +29,14 @@ import os
 import shutil
 import sys
 import time
+import warnings
+
+warnings.warn(
+    "pipeline.py is kept for backward compatibility. Use main.py instead: "
+    "  python main.py abstracts.txt [--language en] [--skip-animation]",
+    DeprecationWarning,
+    stacklevel=1,
+)
 
 # Add project root to path so agents can be imported
 sys.path.insert(0, os.path.dirname(__file__))
