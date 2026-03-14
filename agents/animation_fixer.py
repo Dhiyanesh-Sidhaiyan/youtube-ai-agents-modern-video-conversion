@@ -7,11 +7,12 @@ Uses fix instructions to modify Manim code and re-render.
 import json
 import os
 import re
-import requests
 
-OLLAMA_URL = "http://localhost:11434/api/generate"
-FIXER_MODEL = "phi4"
-OLLAMA_TIMEOUT = 300
+from core.ollama_client import call_ollama
+from core.llm_utils import extract_code
+from core.config import ANIMATION_MODEL, TIMEOUT_LONG
+
+FIXER_MODEL = ANIMATION_MODEL
 
 
 # Fix templates for common issues
@@ -76,36 +77,7 @@ text = Text("Content", color=WHITE, weight=BOLD)
 }
 
 
-FIXER_PROMPT = """You are a Manim code fixer. The following Manim scene has visual issues that need to be fixed.
-
-ORIGINAL CODE:
-```python
-{original_code}
-```
-
-ISSUES DETECTED:
-{issues}
-
-FIX INSTRUCTIONS:
-{fix_instructions}
-
-REFERENCE FIXES:
-{fix_templates}
-
-Rewrite the Manim code with these fixes applied. Key rules:
-1. Keep the same class name: {class_name}
-2. Keep the same overall structure and content
-3. Apply the specific fixes for each issue
-4. Ensure all elements are properly positioned (not cut off at edges)
-5. Use appropriate font sizes (title: 40-48, body: 24-32)
-6. Add self.wait() calls between animations
-7. Scale down large elements with .scale(0.85) if needed
-8. IMPORTANT: For dark/contrast issues, ADD A BACKGROUND at the start of construct():
-   bg = Rectangle(width=16, height=10, fill_color="#1a1a2e", fill_opacity=1, stroke_width=0)
-   self.add(bg)
-9. Use WHITE or bright colors (YELLOW, BLUE_A, GREEN_A) for text on dark backgrounds
-
-Return ONLY the fixed Python code, no explanation."""
+from prompts.animation_prompts import FIXER_PROMPT
 
 
 def read_scene_code(scene_file: str) -> str:
@@ -119,29 +91,10 @@ def read_scene_code(scene_file: str) -> str:
 def call_ollama_fixer(prompt: str) -> str:
     """Call Ollama to fix the code."""
     try:
-        response = requests.post(
-            OLLAMA_URL,
-            json={
-                "model": FIXER_MODEL,
-                "prompt": prompt,
-                "stream": False,
-                "options": {"temperature": 0.2, "num_predict": 2048}
-            },
-            timeout=OLLAMA_TIMEOUT
-        )
-        response.raise_for_status()
-        return response.json().get("response", "")
+        return call_ollama(prompt, model=FIXER_MODEL, timeout=TIMEOUT_LONG, temperature=0.2)
     except Exception as e:
         print(f"    Fixer LLM error: {e}")
         return ""
-
-
-def extract_code(text: str) -> str:
-    """Extract Python code from LLM response."""
-    # Remove markdown code fences
-    text = re.sub(r"```python\s*", "", text)
-    text = re.sub(r"```\s*", "", text)
-    return text.strip()
 
 
 def apply_manual_fixes(code: str, fixes: list) -> str:
@@ -286,7 +239,7 @@ def fix_all_scenes(
 
             if fixed_file:
                 # Re-render the fixed scene
-                from agents.animation_agent import render_manim, _find_rendered_mp4
+                from agents.rendering import render_manim, find_rendered_mp4
 
                 class_name = f"Scene{scene_id}"
                 success, err = render_manim(
@@ -294,7 +247,7 @@ def fix_all_scenes(
                 )
 
                 if success:
-                    mp4 = _find_rendered_mp4(class_name, os.path.dirname(scenes_dir))
+                    mp4 = find_rendered_mp4(class_name, os.path.dirname(scenes_dir))
                     if mp4:
                         print(f"    Scene {scene_id} re-rendered: {mp4}")
                         fixed_results.append({

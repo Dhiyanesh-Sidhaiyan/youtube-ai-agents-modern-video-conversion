@@ -7,96 +7,18 @@ Inspired by: github.com/makefinks/manim-generator
 
 import json
 import os
-import re
-import subprocess
 import sys
-import requests
 
+from core.ollama_client import call_ollama
+from core.llm_utils import extract_code
+from core.config import (
+    ANIMATION_MODEL, REVIEWER_MODEL, TIMEOUT_LONG,
+    MAX_RETRIES, ENABLE_SELF_REFINE, QUALITY_THRESHOLD, MAX_REFINE_ITERATIONS,
+)
+from prompts.animation_prompts import WRITER_PROMPT, REVIEWER_PROMPT
+from agents.rendering import render_manim, find_rendered_mp4
 
-OLLAMA_URL = "http://localhost:11434/api/generate"
-WRITER_MODEL = "phi4"
-REVIEWER_MODEL = "llama3.2:3b"  # fast 3B model for review pass
-MAX_RETRIES = 3
-OLLAMA_TIMEOUT = 300  # seconds — phi4 14B needs time on CPU/low-VRAM
-
-# Per-scene self-refine settings
-ENABLE_SELF_REFINE = True  # Set to False to disable per-scene evaluation loop
-QUALITY_THRESHOLD = 80.0   # Minimum score to pass (0-100)
-MAX_REFINE_ITERATIONS = 3  # Max attempts per scene
-
-WRITER_PROMPT = """You are a Manim Community Edition expert. Write a complete, self-contained
-Manim scene class for the following visual description.
-
-Rules:
-- Use ONLY Manim Community Edition (manim) imports
-- Class name must be exactly: Scene{scene_id}
-- Use simple shapes: Text, Circle, Rectangle, Arrow, NumberPlane, VGroup
-- Animations: Write, FadeIn, FadeOut, Create, Transform, MoveToTarget, GrowArrow
-- Duration: self.wait() calls should total ~30 seconds of animation
-- No external images or assets
-- The code must run with: manim -pql scene_{scene_id}.py Scene{scene_id}
-
-Visual description:
-{visual_description}
-
-Scene title: {title}
-
-Return ONLY the Python code, no explanation, no markdown fences."""
-
-REVIEWER_PROMPT = """Review this Manim Community Edition code for correctness.
-Check for:
-1. Correct imports (from manim import *)
-2. Valid class name matching Scene{scene_id}
-3. Valid Manim API calls (no hallucinated methods)
-4. No syntax errors
-5. Self-contained (no external files)
-
-If the code is correct, reply with: APPROVED
-If there are issues, reply with: FIX NEEDED
-Then list the exact issues and provide the corrected full code.
-
-Code to review:
-{code}"""
-
-MANIM_TEMPLATE = """from manim import *
-
-{code}
-"""
-
-
-def call_ollama(prompt: str, model: str) -> str:
-    payload = {
-        "model": model,
-        "prompt": prompt,
-        "stream": False,
-        "options": {"temperature": 0.2, "num_predict": 2048},
-    }
-    response = requests.post(OLLAMA_URL, json=payload, timeout=OLLAMA_TIMEOUT)
-    response.raise_for_status()
-    return response.json().get("response", "")
-
-
-def extract_code(text: str) -> str:
-    """Strip markdown fences and extract Python code."""
-    text = re.sub(r"```(?:python)?", "", text)
-    text = re.sub(r"```", "", text)
-    return text.strip()
-
-
-def render_manim(scene_file: str, class_name: str, output_dir: str) -> tuple[bool, str]:
-    """Attempt to render a Manim scene. Returns (success, error_message)."""
-    cmd = [
-        sys.executable, "-m", "manim",
-        "-ql",  # low quality for speed during testing
-        "--output_file", class_name,
-        "--media_dir", output_dir,
-        scene_file,
-        class_name,
-    ]
-    result = subprocess.run(cmd, capture_output=True, text=True, timeout=120)
-    if result.returncode == 0:
-        return True, ""
-    return False, result.stderr[-2000:]  # last 2000 chars of error
+WRITER_MODEL = ANIMATION_MODEL
 
 
 def generate_fallback_scene(scene_id: int, title: str, output_dir: str) -> str:
@@ -138,15 +60,6 @@ class {class_name}(Scene):
     with open(scene_file, "w") as f:
         f.write(code)
     return scene_file
-
-
-def _find_rendered_mp4(class_name: str, search_root: str) -> str | None:
-    """Walk search_root to find a rendered MP4 matching class_name."""
-    for root, _, files in os.walk(search_root):
-        for fname in files:
-            if fname == f"{class_name}.mp4":
-                return os.path.join(root, fname)
-    return None
 
 
 def generate_scene(
@@ -199,7 +112,7 @@ def generate_scene(
                         scene_file, class_name, os.path.dirname(scenes_dir)
                     )
                     if success:
-                        mp4 = _find_rendered_mp4(class_name, os.path.dirname(scenes_dir))
+                        mp4 = find_rendered_mp4(class_name, os.path.dirname(scenes_dir))
                         if mp4:
                             print(f"  Template rendered: {mp4}")
                             return mp4
@@ -227,7 +140,7 @@ def generate_scene(
         pb_file = generate_fallback_scene(scene_id, title, scenes_dir)
         success, err = render_manim(pb_file, class_name, os.path.dirname(scenes_dir))
         if success:
-            mp4 = _find_rendered_mp4(class_name, os.path.dirname(scenes_dir))
+            mp4 = find_rendered_mp4(class_name, os.path.dirname(scenes_dir))
             if mp4:
                 print(f"  Pre-built scene rendered: {mp4}")
                 return mp4
@@ -254,14 +167,14 @@ def generate_scene(
         if attempt > 1 and code:
             writer_prompt += f"\n\nPrevious attempt failed with this error:\n{last_error}\nFix the code."
 
-        raw_code = call_ollama(writer_prompt, WRITER_MODEL)
+        raw_code = call_ollama(writer_prompt, model=WRITER_MODEL, timeout=TIMEOUT_LONG, temperature=0.2)
         code = extract_code(raw_code)
 
         if "from manim import" not in code:
             code = "from manim import *\n\n" + code
 
         reviewer_prompt = REVIEWER_PROMPT.format(scene_id=scene_id, code=code)
-        review = call_ollama(reviewer_prompt, REVIEWER_MODEL)
+        review = call_ollama(reviewer_prompt, model=REVIEWER_MODEL, timeout=TIMEOUT_LONG, temperature=0.2)
 
         if "FIX NEEDED" in review.upper():
             fixed = extract_code(review)
@@ -275,7 +188,7 @@ def generate_scene(
         success, last_error = render_manim(scene_file, class_name, os.path.dirname(scenes_dir))
         if success:
             print(f"  LLM scene rendered successfully.")
-            mp4 = _find_rendered_mp4(class_name, os.path.dirname(scenes_dir))
+            mp4 = find_rendered_mp4(class_name, os.path.dirname(scenes_dir))
             if mp4:
                 return mp4
 
@@ -284,7 +197,7 @@ def generate_scene(
     fallback_file = generate_fallback_scene(scene_id, title, scenes_dir)
     success, _ = render_manim(fallback_file, class_name, os.path.dirname(scenes_dir))
     if success:
-        return _find_rendered_mp4(class_name, os.path.dirname(scenes_dir))
+        return find_rendered_mp4(class_name, os.path.dirname(scenes_dir))
     return None
 
 
@@ -309,7 +222,7 @@ def generate_all_scenes(script_path: str, scenes_dir: str) -> list[dict]:
     # Use self-refine loop if enabled
     if ENABLE_SELF_REFINE:
         try:
-            from agents.scene_evaluator import (
+            from agents.evaluation import (
                 generate_with_self_refine,
                 evaluate_all_scenes_summary,
             )
@@ -317,7 +230,7 @@ def generate_all_scenes(script_path: str, scenes_dir: str) -> list[dict]:
             print(f"\n[Animation Agent] Self-refine enabled (threshold: {QUALITY_THRESHOLD})")
         except ImportError:
             use_self_refine = False
-            print("\n[Animation Agent] Self-refine disabled (scene_evaluator not found)")
+            print("\n[Animation Agent] Self-refine disabled (agents.evaluation not found)")
     else:
         use_self_refine = False
         print("\n[Animation Agent] Self-refine disabled by config")

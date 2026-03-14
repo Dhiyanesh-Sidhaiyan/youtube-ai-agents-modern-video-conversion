@@ -28,7 +28,15 @@ import os
 import shutil
 import sys
 import time
+import warnings
 from datetime import datetime
+
+warnings.warn(
+    "framework.py is kept for backward compatibility. Use main.py instead: "
+    "  python main.py <youtube_url_or_transcript> [--language en]",
+    DeprecationWarning,
+    stacklevel=1,
+)
 
 # Ensure agents package is importable
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
@@ -205,7 +213,7 @@ def run_pipeline(
     print_step(6, 6, "Final Quality Report")
 
     from agents.eval_agent import evaluate_pipeline
-    from agents.visual_analyzer import analyze_all_scenes
+    from agents.visual_analysis import analyze_all_scenes
 
     eval_path = os.path.join(output_dir, "evaluation.json")
     visual_path = os.path.join(output_dir, "visual_analysis.json")
